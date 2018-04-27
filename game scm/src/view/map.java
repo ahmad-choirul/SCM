@@ -37,9 +37,9 @@ public class map extends masterview {
     public void setgudangfinish() {
         try {
             String data[] = modelbarang.cekbarang(id);
-            txtserealcoklat.setText(data[12]);
-            txtserealkeju.setText(data[13]);
-            txtturbo.setText(data[14]);
+            txtserealcoklat.setText(data[13]);
+            txtserealkeju.setText(data[14]);
+            txtturbo.setText(data[15]);
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,11 +50,12 @@ public class map extends masterview {
             String data[] = modelbarang.cekbarang(id);
             txtbbjagung.setText(data[5]);
             txtbbgandum.setText(data[6]);
-            txtbbair.setText(data[7]);
-            txtbmsereal.setText(data[8]);
-            txtbmcoklat.setText(data[9]);
-            txtbmplastik.setText(data[10]);
-            txtbmkeju.setText(data[11]);
+            txtbbsusu.setText(data[7]);
+            txtbbgula.setText(data[8]);
+            txtbmsereal.setText(data[9]);
+            txtbmcoklat.setText(data[10]);
+            txtbmplastik.setText(data[11]);
+            txtbmkeju.setText(data[12]);
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,30 +85,29 @@ public class map extends masterview {
         panelsawah = new javax.swing.JPanel();
         btnmap4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         background5 = new javax.swing.JLabel();
         panelgudangppic = new javax.swing.JPanel();
         btnmap3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtbbjagung = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         txtbbgandum = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        txtbbair = new javax.swing.JLabel();
+        txtbbsusu = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
         txtbmsereal = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
         txtbmcoklat = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
         txtbmkeju = new javax.swing.JLabel();
         txtbmplastik = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtbbgula = new javax.swing.JLabel();
         background4 = new javax.swing.JLabel();
         panelpabrik = new javax.swing.JPanel();
         btnmap1 = new javax.swing.JButton();
@@ -258,9 +258,40 @@ public class map extends masterview {
         });
         panelsawah.add(btnmap4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
 
-        jButton3.setText("jButton3");
-        panelsawah.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 150));
-        panelsawah.add(background5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, -90, 1370, 770));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/tpanen1.png"))); // NOI18N
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setFocusPainted(false);
+        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/tpanen2.png"))); // NOI18N
+        panelsawah.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 170, 160));
+
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/air.png"))); // NOI18N
+        jButton13.setBorderPainted(false);
+        jButton13.setContentAreaFilled(false);
+        jButton13.setFocusPainted(false);
+        jButton13.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/air1.png"))); // NOI18N
+        panelsawah.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 170, 160));
+
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/gunting1.png"))); // NOI18N
+        jButton14.setBorderPainted(false);
+        jButton14.setContentAreaFilled(false);
+        jButton14.setFocusPainted(false);
+        jButton14.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/gunting2.png"))); // NOI18N
+        panelsawah.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 170, 160));
+
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ttanam1.png"))); // NOI18N
+        jButton15.setBorderPainted(false);
+        jButton15.setContentAreaFilled(false);
+        jButton15.setFocusPainted(false);
+        jButton15.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ttanam2.png"))); // NOI18N
+        panelsawah.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 160));
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/Soil2_1.png"))); // NOI18N
+        jToggleButton1.setBorderPainted(false);
+        jToggleButton1.setContentAreaFilled(false);
+        jToggleButton1.setFocusPainted(false);
+        panelsawah.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 670, 460));
+        panelsawah.add(background5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         panelutama.add(panelsawah, "card3");
 
@@ -273,71 +304,66 @@ public class map extends masterview {
                 btnmap3ActionPerformed(evt);
             }
         });
-        panelgudangppic.add(btnmap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+        panelgudangppic.add(btnmap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 660, 130, 90));
 
-        jLabel4.setText("bb jagung");
-        panelgudangppic.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 200, 100));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_jagung.png"))); // NOI18N
+        panelgudangppic.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 90, 60));
 
-        txtbbjagung.setText("jLabel5");
-        panelgudangppic.add(txtbbjagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 214, 70, 30));
+        txtbbjagung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbbjagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 70, 30));
 
-        jButton6.setText("jButton6");
-        panelgudangppic.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 100, 60));
+        txtbbgandum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbbgandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
 
-        jButton7.setText("jButton6");
-        panelgudangppic.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 100, 60));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_gandum.png"))); // NOI18N
+        panelgudangppic.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 90, 60));
 
-        txtbbgandum.setText("jLabel5");
-        panelgudangppic.add(txtbbgandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 224, 70, 30));
+        txtbbsusu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbbsusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 70, 30));
 
-        jLabel7.setText("bbgandum");
-        panelgudangppic.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 200, 100));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_susu.png"))); // NOI18N
+        panelgudangppic.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 90, 60));
 
-        jButton8.setText("jButton6");
-        panelgudangppic.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 100, 60));
+        txtbmsereal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 70, 30));
 
-        txtbbair.setText("jLabel5");
-        panelgudangppic.add(txtbbair, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
+        panelgudangppic.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 90, 60));
 
-        jLabel9.setText("air");
-        panelgudangppic.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 200, 100));
+        txtbmcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 70, 30));
 
-        jButton9.setText("jButton6");
-        panelgudangppic.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 250, 100, 60));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_coklat.png"))); // NOI18N
+        panelgudangppic.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 90, 60));
 
-        txtbmsereal.setText("jLabel5");
-        panelgudangppic.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, -1, -1));
+        txtbmkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbmkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 70, 30));
 
-        jLabel11.setText("bmsereal");
-        panelgudangppic.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 200, 100));
+        txtbmplastik.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbmplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 70, 30));
 
-        jButton10.setText("jButton6");
-        panelgudangppic.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, 100, 60));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_plastik.png"))); // NOI18N
+        panelgudangppic.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, 90, 60));
 
-        txtbmcoklat.setText("jLabel5");
-        panelgudangppic.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, -1, -1));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_keju.png"))); // NOI18N
+        panelgudangppic.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 90, 60));
 
-        jLabel13.setText("bmcoklat");
-        panelgudangppic.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 90, 200, 100));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_gula.png"))); // NOI18N
+        panelgudangppic.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 60));
 
-        jButton11.setText("jButton6");
-        panelgudangppic.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 490, 100, 60));
+        txtbbgula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelgudangppic.add(txtbbgula, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 70, 30));
 
-        jButton12.setText("jButton6");
-        panelgudangppic.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 480, 100, 60));
-
-        txtbmkeju.setText("jLabel5");
-        panelgudangppic.add(txtbmkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 430, -1, -1));
-
-        txtbmplastik.setText("jLabel5");
-        panelgudangppic.add(txtbmplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, -1, -1));
-
-        jLabel16.setText("bmolastik");
-        panelgudangppic.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 320, 200, 100));
-
-        jLabel17.setText("bmkeju");
-        panelgudangppic.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 310, 200, 100));
-        panelgudangppic.add(background4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 1370, 770));
+        background4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgppic.png"))); // NOI18N
+        panelgudangppic.add(background4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         panelutama.add(panelgudangppic, "card3");
 
@@ -599,19 +625,16 @@ public class map extends masterview {
     private javax.swing.JLabel gambarmesin3;
     private javax.swing.JLabel gambarmesin4;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -620,6 +643,7 @@ public class map extends masterview {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton mesin1;
     private javax.swing.JButton mesin2;
     private javax.swing.JButton mesin3;
@@ -631,9 +655,10 @@ public class map extends masterview {
     private javax.swing.JPanel panelpabrik;
     private javax.swing.JPanel panelsawah;
     private diu.swe.habib.JPanelSlider.JPanelSlider panelutama;
-    private javax.swing.JLabel txtbbair;
     private javax.swing.JLabel txtbbgandum;
+    private javax.swing.JLabel txtbbgula;
     private javax.swing.JLabel txtbbjagung;
+    private javax.swing.JLabel txtbbsusu;
     private javax.swing.JLabel txtbmcoklat;
     private javax.swing.JLabel txtbmkeju;
     private javax.swing.JLabel txtbmplastik;

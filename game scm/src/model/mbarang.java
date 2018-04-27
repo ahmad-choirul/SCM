@@ -20,11 +20,7 @@ public class mbarang extends koneksi {
         super();
     }
 
-    public boolean tambahuser(String nama) {
-        String query = "INSERT INTO `user` (`id_user`, `nama`, `score`, `scorepopularitas`, `uang`, `bbjagung`, `bbgandum`, `bbair`, `bmsereal`, `bmcoklat`, `bmplastik`, `bmkeju`, `bjserealcoklat`, `bjserealkeju`, `bjturbo`) VALUES "
-                + "(NULL, '"+nama+"', '0', '100', '1000', '10', '10', '100', '2', '2', '5', '2', '0', '0', '0');";
-        return execute(query);
-    }
+    
 
     public boolean updatebarang(String data[]) {
         String query = "UPDATE `barang` SET `nama_barang`='" + data[1] + "',`harga_beli`='" + data[2] + "',`harga_jual`='" + data[3] + "',"
@@ -33,7 +29,7 @@ public class mbarang extends koneksi {
     }
 
     public String[] cekbarang(String id) throws SQLException {
-            String kolom[] = {"id_user","nama","score","scorepopularitas","uang","bbjagung","bbgandum","bbair","bmsereal",
+            String kolom[] = {"id_user","nama","score","scorepopularitas","uang","bbjagung","bbgandum","bbsusu","bbgula","bmsereal",
                 "bmcoklat","bmplastik","bmkeju","bjserealcoklat","bjserealkeju","bjturbo"};
             String query = "select * from user where id_user = " + id;
             return getdataid(query, kolom);
