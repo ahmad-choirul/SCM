@@ -99,7 +99,7 @@ public class pabrik extends masterview {
                 mesin4MouseClicked(evt);
             }
         });
-        getContentPane().add(mesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 350, 260, 250));
+        getContentPane().add(mesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 420, 260, 250));
 
         gambarmesin4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
         getContentPane().add(gambarmesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 250, 260));

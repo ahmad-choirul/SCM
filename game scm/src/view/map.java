@@ -81,12 +81,16 @@ public class map extends masterview {
         background = new javax.swing.JLabel();
         panelmarketing = new javax.swing.JPanel();
         btnmap2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         background3 = new javax.swing.JLabel();
         panelsawah = new javax.swing.JPanel();
         btnmap4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         background5 = new javax.swing.JLabel();
@@ -111,14 +115,12 @@ public class map extends masterview {
         background4 = new javax.swing.JLabel();
         panelpabrik = new javax.swing.JPanel();
         btnmap1 = new javax.swing.JButton();
-        mesin1 = new javax.swing.JButton();
         mesin2 = new javax.swing.JButton();
         mesin3 = new javax.swing.JButton();
         mesin4 = new javax.swing.JButton();
         gambarmesin4 = new javax.swing.JLabel();
-        gambarmesin1 = new javax.swing.JLabel();
         gambarmesin3 = new javax.swing.JLabel();
-        gambarmesin2 = new javax.swing.JLabel();
+        iconmesinjadi = new javax.swing.JLabel();
         background2 = new javax.swing.JLabel();
         panelgudangfinish = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -131,7 +133,8 @@ public class map extends masterview {
         txtturbo = new javax.swing.JLabel();
         txtserealcoklat = new javax.swing.JLabel();
         txtserealkeju = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         background1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -243,6 +246,22 @@ public class map extends masterview {
             }
         });
         panelmarketing.add(btnmap2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        panelmarketing.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 220, 390));
+        panelmarketing.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 120, 40));
+        panelmarketing.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 240, 80));
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/Avatar.gif"))); // NOI18N
+        jButton6.setBorderPainted(false);
+        jButton6.setContentAreaFilled(false);
+        jButton6.setFocusPainted(false);
+        panelmarketing.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, 240, 370));
+        jButton6.getAccessibleContext().setAccessibleDescription("");
+
         panelmarketing.add(background3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         panelutama.add(panelmarketing, "card3");
@@ -256,47 +275,41 @@ public class map extends masterview {
                 btnmap4ActionPerformed(evt);
             }
         });
-        panelsawah.add(btnmap4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+        panelsawah.add(btnmap4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 660, 130, 90));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/tpanen1.png"))); // NOI18N
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
         jButton3.setFocusPainted(false);
         jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/tpanen2.png"))); // NOI18N
-        panelsawah.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 170, 160));
+        panelsawah.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 120, 170, 160));
 
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/air.png"))); // NOI18N
         jButton13.setBorderPainted(false);
         jButton13.setContentAreaFilled(false);
         jButton13.setFocusPainted(false);
         jButton13.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/air1.png"))); // NOI18N
-        panelsawah.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 170, 160));
-
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/gunting1.png"))); // NOI18N
-        jButton14.setBorderPainted(false);
-        jButton14.setContentAreaFilled(false);
-        jButton14.setFocusPainted(false);
-        jButton14.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/gunting2.png"))); // NOI18N
-        panelsawah.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 170, 160));
+        panelsawah.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 280, 170, 160));
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ttanam1.png"))); // NOI18N
         jButton15.setBorderPainted(false);
         jButton15.setContentAreaFilled(false);
         jButton15.setFocusPainted(false);
         jButton15.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ttanam2.png"))); // NOI18N
-        panelsawah.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 160));
+        panelsawah.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 440, 170, 160));
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/Soil2_1.png"))); // NOI18N
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/sawah.png"))); // NOI18N
         jToggleButton1.setBorderPainted(false);
         jToggleButton1.setContentAreaFilled(false);
         jToggleButton1.setFocusPainted(false);
-        panelsawah.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 670, 460));
+        panelsawah.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -12, 1380, 780));
         panelsawah.add(background5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         panelutama.add(panelsawah, "card3");
 
         panelgudangppic.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnmap3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/map1.png"))); // NOI18N
         btnmap3.setText("map");
         btnmap3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnmap3.addActionListener(new java.awt.event.ActionListener() {
@@ -304,17 +317,17 @@ public class map extends masterview {
                 btnmap3ActionPerformed(evt);
             }
         });
-        panelgudangppic.add(btnmap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 660, 130, 90));
+        panelgudangppic.add(btnmap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 660, 130, 90));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_jagung.png"))); // NOI18N
         panelgudangppic.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 90, 60));
 
         txtbbjagung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbbjagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 70, 30));
+        panelgudangppic.add(txtbbjagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 70, 30));
 
         txtbbgandum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbbgandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 70, 30));
+        panelgudangppic.add(txtbbgandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 70, 30));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_gandum.png"))); // NOI18N
@@ -328,24 +341,24 @@ public class map extends masterview {
         panelgudangppic.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 90, 60));
 
         txtbmsereal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 70, 30));
+        panelgudangppic.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 70, 30));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
         panelgudangppic.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 90, 60));
 
         txtbmcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 70, 30));
+        panelgudangppic.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 70, 30));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_coklat.png"))); // NOI18N
         panelgudangppic.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 90, 60));
 
         txtbmkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 70, 30));
+        panelgudangppic.add(txtbmkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, 70, 30));
 
         txtbmplastik.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, 70, 30));
+        panelgudangppic.add(txtbmplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 70, 30));
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_plastik.png"))); // NOI18N
@@ -360,7 +373,7 @@ public class map extends masterview {
         panelgudangppic.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 60));
 
         txtbbgula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbbgula, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 70, 30));
+        panelgudangppic.add(txtbbgula, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 70, 30));
 
         background4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgppic.png"))); // NOI18N
         panelgudangppic.add(background4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
@@ -378,16 +391,6 @@ public class map extends masterview {
         });
         panelpabrik.add(btnmap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
 
-        mesin1.setBorderPainted(false);
-        mesin1.setContentAreaFilled(false);
-        mesin1.setFocusPainted(false);
-        mesin1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mesin1MouseClicked(evt);
-            }
-        });
-        panelpabrik.add(mesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 270, 250));
-
         mesin2.setBorderPainted(false);
         mesin2.setContentAreaFilled(false);
         mesin2.setFocusPainted(false);
@@ -396,7 +399,12 @@ public class map extends masterview {
                 mesin2MouseClicked(evt);
             }
         });
-        panelpabrik.add(mesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 260, 250));
+        mesin2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mesin2ActionPerformed(evt);
+            }
+        });
+        panelpabrik.add(mesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 350, 350));
 
         mesin3.setBorderPainted(false);
         mesin3.setContentAreaFilled(false);
@@ -422,16 +430,13 @@ public class map extends masterview {
         gambarmesin4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
         panelpabrik.add(gambarmesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 250, 260));
 
-        gambarmesin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
-        panelpabrik.add(gambarmesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 270, 250));
-
         gambarmesin3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
         panelpabrik.add(gambarmesin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, 250, 260));
 
-        gambarmesin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
-        gambarmesin2.setToolTipText("");
-        panelpabrik.add(gambarmesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 270, 250));
-        panelpabrik.add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
+        iconmesinjadi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesindiam.png"))); // NOI18N
+        iconmesinjadi.setToolTipText("");
+        panelpabrik.add(iconmesinjadi, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 350, 340));
+        panelpabrik.add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1370, 770));
 
         panelutama.add(panelpabrik, "card3");
 
@@ -454,14 +459,8 @@ public class map extends masterview {
             }
         });
         panelgudangfinish.add(btnmap, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
-
-        jButton2.setText("jButton2");
         panelgudangfinish.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 520, 150, 70));
-
-        jButton4.setText("jButton4");
         panelgudangfinish.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 150, 70));
-
-        jButton5.setText("jButton5");
         panelgudangfinish.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 520, 140, 70));
 
         txtturbo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -475,7 +474,12 @@ public class map extends masterview {
         txtserealkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtserealkeju.setText("jLabel4");
         panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, 80, 30));
-        panelgudangfinish.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 720, 320));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        panelgudangfinish.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 180, 300));
 
         background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bggudang.jpg"))); // NOI18N
         panelgudangfinish.add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
@@ -532,12 +536,8 @@ public class map extends masterview {
         panelutama.nextPanel(25, panelmap, panelutama.left);
     }//GEN-LAST:event_btnmap1ActionPerformed
 
-    private void mesin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin1MouseClicked
-        seticongif("mesingif", gambarmesin1);
-    }//GEN-LAST:event_mesin1MouseClicked
-
     private void mesin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin2MouseClicked
-        seticongif("mesingif", gambarmesin2);
+        seticongif("mesingif", iconmesinjadi);
     }//GEN-LAST:event_mesin2MouseClicked
 
     private void mesin3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin3MouseClicked
@@ -566,6 +566,10 @@ public class map extends masterview {
     private void btngudangppicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngudangppicActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btngudangppicActionPerformed
+
+    private void mesin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesin2ActionPerformed
+        seticongif("mesin2", iconmesinjadi);
+    }//GEN-LAST:event_mesin2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -620,18 +624,17 @@ public class map extends masterview {
     private javax.swing.JButton btnmarketing;
     private javax.swing.JButton btnparik;
     private javax.swing.JButton btnsawah;
-    private javax.swing.JLabel gambarmesin1;
-    private javax.swing.JLabel gambarmesin2;
     private javax.swing.JLabel gambarmesin3;
     private javax.swing.JLabel gambarmesin4;
+    private javax.swing.JLabel iconmesinjadi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -643,8 +646,12 @@ public class map extends masterview {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JButton mesin1;
     private javax.swing.JButton mesin2;
     private javax.swing.JButton mesin3;
     private javax.swing.JButton mesin4;
