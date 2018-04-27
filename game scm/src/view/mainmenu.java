@@ -5,6 +5,12 @@
  */
 package view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.muser;
+
 /**
  *
  * @author acer
@@ -14,8 +20,14 @@ public class mainmenu extends masterview{
     /**
      * Creates new form mainmenu
      */
+    muser modeluser;
     public mainmenu() {
-        initComponents();
+        try {
+            initComponents();
+            modeluser= new muser();
+        } catch (SQLException ex) {
+            Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -96,7 +108,14 @@ public class mainmenu extends masterview{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnplayActionPerformed
-        setwindows(new map());
+        try {
+            String nama = JOptionPane.showInputDialog("masukan nama anda");
+            System.out.println("nama = "+nama);
+            modeluser.tambahuser(nama);
+            setwindows(new map(modeluser.getiduser(nama)));
+        } catch (SQLException ex) {
+            Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnplayActionPerformed
 
     private void btnhelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhelpActionPerformed

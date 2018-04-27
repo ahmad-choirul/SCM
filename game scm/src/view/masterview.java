@@ -6,6 +6,7 @@
 package view;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,5 +17,12 @@ public class masterview extends javax.swing.JFrame {
     public void setwindows(JFrame a) {
         a.setVisible(true);
         this.dispose();
+    }
+    public void seticongif(String file, JLabel btn) {
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/"+file+".gif")));
+    }
+
+    public void seticonpng(String file, JLabel btn) {
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/"+file+".png")));
     }
 }

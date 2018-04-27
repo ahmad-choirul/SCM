@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.mbarang;
+
 /**
  *
  * @author acer
@@ -14,8 +19,45 @@ public class map extends masterview {
     /**
      * Creates new form play
      */
-    public map() {
+    String id;
+    mbarang modelbarang;
+
+    public map(String id) {
         initComponents();
+        this.setVisible(true);
+        try {
+            modelbarang = new mbarang();
+            this.id = id;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setgudangfinish() {
+        try {
+            String data[] = modelbarang.cekbarang(id);
+            txtserealcoklat.setText(data[12]);
+            txtserealkeju.setText(data[13]);
+            txtturbo.setText(data[14]);
+        } catch (SQLException ex) {
+            Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setgudangppic() {
+        try {
+            String data[] = modelbarang.cekbarang(id);
+            txtbbjagung.setText(data[5]);
+            txtbbgandum.setText(data[6]);
+            txtbbair.setText(data[7]);
+            txtbmsereal.setText(data[8]);
+            txtbmcoklat.setText(data[9]);
+            txtbmplastik.setText(data[10]);
+            txtbmkeju.setText(data[11]);
+        } catch (SQLException ex) {
+            Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -27,6 +69,8 @@ public class map extends masterview {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelutama = new diu.swe.habib.JPanelSlider.JPanelSlider();
+        panelmap = new javax.swing.JPanel();
         btnparik = new javax.swing.JButton();
         btnsawah = new javax.swing.JButton();
         btnmarketing = new javax.swing.JButton();
@@ -34,10 +78,67 @@ public class map extends masterview {
         btngudangfinsih = new javax.swing.JButton();
         btnexit = new javax.swing.JButton();
         background = new javax.swing.JLabel();
+        panelmarketing = new javax.swing.JPanel();
+        btnmap2 = new javax.swing.JButton();
+        background3 = new javax.swing.JLabel();
+        panelsawah = new javax.swing.JPanel();
+        btnmap4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        background5 = new javax.swing.JLabel();
+        panelgudangppic = new javax.swing.JPanel();
+        btnmap3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtbbjagung = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        txtbbgandum = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        txtbbair = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
+        txtbmsereal = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        txtbmcoklat = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        txtbmkeju = new javax.swing.JLabel();
+        txtbmplastik = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        background4 = new javax.swing.JLabel();
+        panelpabrik = new javax.swing.JPanel();
+        btnmap1 = new javax.swing.JButton();
+        mesin1 = new javax.swing.JButton();
+        mesin2 = new javax.swing.JButton();
+        mesin3 = new javax.swing.JButton();
+        mesin4 = new javax.swing.JButton();
+        gambarmesin4 = new javax.swing.JLabel();
+        gambarmesin1 = new javax.swing.JLabel();
+        gambarmesin3 = new javax.swing.JLabel();
+        gambarmesin2 = new javax.swing.JLabel();
+        background2 = new javax.swing.JLabel();
+        panelgudangfinish = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnmap = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        txtturbo = new javax.swing.JLabel();
+        txtserealcoklat = new javax.swing.JLabel();
+        txtserealkeju = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        background1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.CardLayout());
+
+        panelmap.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnparik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/pabrik1.png"))); // NOI18N
         btnparik.setBorderPainted(false);
@@ -50,7 +151,12 @@ public class map extends masterview {
                 btnparikMouseClicked(evt);
             }
         });
-        getContentPane().add(btnparik, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 270, 240));
+        btnparik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnparikActionPerformed(evt);
+            }
+        });
+        panelmap.add(btnparik, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 320, 270, 240));
 
         btnsawah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/sawah1.png"))); // NOI18N
         btnsawah.setBorderPainted(false);
@@ -63,7 +169,7 @@ public class map extends masterview {
                 btnsawahMouseClicked(evt);
             }
         });
-        getContentPane().add(btnsawah, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 300, 290));
+        panelmap.add(btnsawah, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 300, 290));
 
         btnmarketing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/seller1.png"))); // NOI18N
         btnmarketing.setBorderPainted(false);
@@ -76,7 +182,7 @@ public class map extends masterview {
                 btnmarketingMouseClicked(evt);
             }
         });
-        getContentPane().add(btnmarketing, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 480, 300, 270));
+        panelmap.add(btnmarketing, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 480, 300, 270));
 
         btngudangppic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ppic1.png"))); // NOI18N
         btngudangppic.setBorderPainted(false);
@@ -89,7 +195,12 @@ public class map extends masterview {
                 btngudangppicMouseClicked(evt);
             }
         });
-        getContentPane().add(btngudangppic, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 320, 290));
+        btngudangppic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btngudangppicActionPerformed(evt);
+            }
+        });
+        panelmap.add(btngudangppic, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 320, 290));
 
         btngudangfinsih.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/FG1.png"))); // NOI18N
         btngudangfinsih.setBorderPainted(false);
@@ -102,7 +213,7 @@ public class map extends masterview {
                 btngudangfinsihMouseClicked(evt);
             }
         });
-        getContentPane().add(btngudangfinsih, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 290, 260));
+        panelmap.add(btngudangfinsih, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 290, 260));
 
         btnexit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/b_back.png"))); // NOI18N
         btnexit.setBorderPainted(false);
@@ -115,37 +226,320 @@ public class map extends masterview {
                 btnexitMouseClicked(evt);
             }
         });
-        getContentPane().add(btnexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 0, 140, 130));
+        panelmap.add(btnexit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 0, 140, 130));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgmap.png"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
+        panelmap.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1360, 770));
+
+        panelutama.add(panelmap, "card2");
+
+        panelmarketing.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnmap2.setText("map");
+        btnmap2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnmap2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmap2ActionPerformed(evt);
+            }
+        });
+        panelmarketing.add(btnmap2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+        panelmarketing.add(background3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
+
+        panelutama.add(panelmarketing, "card3");
+
+        panelsawah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnmap4.setText("map");
+        btnmap4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnmap4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmap4ActionPerformed(evt);
+            }
+        });
+        panelsawah.add(btnmap4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+
+        jButton3.setText("jButton3");
+        panelsawah.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 150));
+        panelsawah.add(background5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, -90, 1370, 770));
+
+        panelutama.add(panelsawah, "card3");
+
+        panelgudangppic.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnmap3.setText("map");
+        btnmap3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnmap3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmap3ActionPerformed(evt);
+            }
+        });
+        panelgudangppic.add(btnmap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+
+        jLabel4.setText("bb jagung");
+        panelgudangppic.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 200, 100));
+
+        txtbbjagung.setText("jLabel5");
+        panelgudangppic.add(txtbbjagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 214, 70, 30));
+
+        jButton6.setText("jButton6");
+        panelgudangppic.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 100, 60));
+
+        jButton7.setText("jButton6");
+        panelgudangppic.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 100, 60));
+
+        txtbbgandum.setText("jLabel5");
+        panelgudangppic.add(txtbbgandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 224, 70, 30));
+
+        jLabel7.setText("bbgandum");
+        panelgudangppic.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 200, 100));
+
+        jButton8.setText("jButton6");
+        panelgudangppic.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 100, 60));
+
+        txtbbair.setText("jLabel5");
+        panelgudangppic.add(txtbbair, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+
+        jLabel9.setText("air");
+        panelgudangppic.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 200, 100));
+
+        jButton9.setText("jButton6");
+        panelgudangppic.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 250, 100, 60));
+
+        txtbmsereal.setText("jLabel5");
+        panelgudangppic.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, -1, -1));
+
+        jLabel11.setText("bmsereal");
+        panelgudangppic.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 200, 100));
+
+        jButton10.setText("jButton6");
+        panelgudangppic.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 260, 100, 60));
+
+        txtbmcoklat.setText("jLabel5");
+        panelgudangppic.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, -1, -1));
+
+        jLabel13.setText("bmcoklat");
+        panelgudangppic.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 90, 200, 100));
+
+        jButton11.setText("jButton6");
+        panelgudangppic.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 490, 100, 60));
+
+        jButton12.setText("jButton6");
+        panelgudangppic.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 480, 100, 60));
+
+        txtbmkeju.setText("jLabel5");
+        panelgudangppic.add(txtbmkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 430, -1, -1));
+
+        txtbmplastik.setText("jLabel5");
+        panelgudangppic.add(txtbmplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, -1, -1));
+
+        jLabel16.setText("bmolastik");
+        panelgudangppic.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 320, 200, 100));
+
+        jLabel17.setText("bmkeju");
+        panelgudangppic.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 310, 200, 100));
+        panelgudangppic.add(background4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 1370, 770));
+
+        panelutama.add(panelgudangppic, "card3");
+
+        panelpabrik.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnmap1.setText("map");
+        btnmap1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnmap1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmap1ActionPerformed(evt);
+            }
+        });
+        panelpabrik.add(btnmap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+
+        mesin1.setBorderPainted(false);
+        mesin1.setContentAreaFilled(false);
+        mesin1.setFocusPainted(false);
+        mesin1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mesin1MouseClicked(evt);
+            }
+        });
+        panelpabrik.add(mesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 270, 250));
+
+        mesin2.setBorderPainted(false);
+        mesin2.setContentAreaFilled(false);
+        mesin2.setFocusPainted(false);
+        mesin2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mesin2MouseClicked(evt);
+            }
+        });
+        panelpabrik.add(mesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 260, 250));
+
+        mesin3.setBorderPainted(false);
+        mesin3.setContentAreaFilled(false);
+        mesin3.setFocusPainted(false);
+        mesin3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mesin3MouseClicked(evt);
+            }
+        });
+        panelpabrik.add(mesin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 280, 250));
+
+        mesin4.setBorderPainted(false);
+        mesin4.setContentAreaFilled(false);
+        mesin4.setFocusPainted(false);
+        mesin4.setVerifyInputWhenFocusTarget(false);
+        mesin4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mesin4MouseClicked(evt);
+            }
+        });
+        panelpabrik.add(mesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 350, 260, 250));
+
+        gambarmesin4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
+        panelpabrik.add(gambarmesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 250, 260));
+
+        gambarmesin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
+        panelpabrik.add(gambarmesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 270, 250));
+
+        gambarmesin3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
+        panelpabrik.add(gambarmesin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, 250, 260));
+
+        gambarmesin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
+        gambarmesin2.setToolTipText("");
+        panelpabrik.add(gambarmesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 270, 250));
+        panelpabrik.add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
+
+        panelutama.add(panelpabrik, "card3");
+
+        panelgudangfinish.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjserealkeju.png"))); // NOI18N
+        panelgudangfinish.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 160, 150));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjturbo.png"))); // NOI18N
+        panelgudangfinish.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 310, 140, 150));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjserealcoklat.png"))); // NOI18N
+        panelgudangfinish.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 110, 150));
+
+        btnmap.setText("map");
+        btnmap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnmap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmapActionPerformed(evt);
+            }
+        });
+        panelgudangfinish.add(btnmap, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
+
+        jButton2.setText("jButton2");
+        panelgudangfinish.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 520, 150, 70));
+
+        jButton4.setText("jButton4");
+        panelgudangfinish.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 150, 70));
+
+        jButton5.setText("jButton5");
+        panelgudangfinish.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 520, 140, 70));
+
+        txtturbo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtturbo.setText("jLabel4");
+        panelgudangfinish.add(txtturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 480, 80, 30));
+
+        txtserealcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtserealcoklat.setText("jLabel4");
+        panelgudangfinish.add(txtserealcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 80, 30));
+
+        txtserealkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtserealkeju.setText("jLabel4");
+        panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, 80, 30));
+        panelgudangfinish.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 720, 320));
+
+        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bggudang.jpg"))); // NOI18N
+        panelgudangfinish.add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
+
+        panelutama.add(panelgudangfinish, "card3");
+
+        getContentPane().add(panelutama, "card8");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsawahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsawahMouseClicked
-        setwindows(new sawah());
+//        setwindows(new sawah());
+        panelutama.nextPanel(25, panelsawah, panelutama.right);
     }//GEN-LAST:event_btnsawahMouseClicked
 
     private void btngudangppicMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btngudangppicMouseClicked
-        setwindows(new gudangppic());
+//        setwindows(new gudangppic());
+        setgudangppic();
+        panelutama.nextPanel(25, panelgudangppic, panelutama.right);
     }//GEN-LAST:event_btngudangppicMouseClicked
 
     private void btnmarketingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmarketingMouseClicked
-        setwindows(new marketing());
+//        setwindows(new marketing());
+        panelutama.nextPanel(25, panelmarketing, panelutama.right);
     }//GEN-LAST:event_btnmarketingMouseClicked
 
     private void btnparikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnparikMouseClicked
-        setwindows(new pabrik());
+//        setwindows(new pabrik());
+        panelutama.nextPanel(25, panelpabrik, panelutama.right);
     }//GEN-LAST:event_btnparikMouseClicked
 
     private void btngudangfinsihMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btngudangfinsihMouseClicked
-        setwindows(new gudangfinish());
+//        setwindows(new gudangfinish());
+        panelutama.nextPanel(25, panelgudangfinish, panelutama.right);
+        setgudangfinish();
     }//GEN-LAST:event_btngudangfinsihMouseClicked
 
     private void btnexitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnexitMouseClicked
         setwindows(new mainmenu());
     }//GEN-LAST:event_btnexitMouseClicked
+
+    private void btnparikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnparikActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnparikActionPerformed
+
+    private void btnmapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmapActionPerformed
+//        setwindows(new map());
+        panelutama.nextPanel(25, panelmap, panelutama.left);
+    }//GEN-LAST:event_btnmapActionPerformed
+
+    private void btnmap1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmap1ActionPerformed
+//        setwindows(new map());
+        panelutama.nextPanel(25, panelmap, panelutama.left);
+    }//GEN-LAST:event_btnmap1ActionPerformed
+
+    private void mesin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin1MouseClicked
+        seticongif("mesingif", gambarmesin1);
+    }//GEN-LAST:event_mesin1MouseClicked
+
+    private void mesin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin2MouseClicked
+        seticongif("mesingif", gambarmesin2);
+    }//GEN-LAST:event_mesin2MouseClicked
+
+    private void mesin3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin3MouseClicked
+        seticongif("mesingif", gambarmesin3);
+    }//GEN-LAST:event_mesin3MouseClicked
+
+    private void mesin4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin4MouseClicked
+        seticongif("mesingif", gambarmesin4);
+    }//GEN-LAST:event_mesin4MouseClicked
+
+    private void btnmap2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmap2ActionPerformed
+//        setwindows(new map());
+        panelutama.nextPanel(25, panelmap, panelutama.left);
+    }//GEN-LAST:event_btnmap2ActionPerformed
+
+    private void btnmap3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmap3ActionPerformed
+//        setwindows(new map());
+        panelutama.nextPanel(25, panelmap, panelutama.left);
+    }//GEN-LAST:event_btnmap3ActionPerformed
+
+    private void btnmap4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmap4ActionPerformed
+        //        setwindows(new map());
+        panelutama.nextPanel(25, panelmap, panelutama.left);
+    }//GEN-LAST:event_btnmap4ActionPerformed
+
+    private void btngudangppicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngudangppicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btngudangppicActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,18 +572,74 @@ public class map extends masterview {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new map().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JLabel background1;
+    private javax.swing.JLabel background2;
+    private javax.swing.JLabel background3;
+    private javax.swing.JLabel background4;
+    private javax.swing.JLabel background5;
     private javax.swing.JButton btnexit;
     private javax.swing.JButton btngudangfinsih;
     private javax.swing.JButton btngudangppic;
+    private javax.swing.JButton btnmap;
+    private javax.swing.JButton btnmap1;
+    private javax.swing.JButton btnmap2;
+    private javax.swing.JButton btnmap3;
+    private javax.swing.JButton btnmap4;
     private javax.swing.JButton btnmarketing;
     private javax.swing.JButton btnparik;
     private javax.swing.JButton btnsawah;
+    private javax.swing.JLabel gambarmesin1;
+    private javax.swing.JLabel gambarmesin2;
+    private javax.swing.JLabel gambarmesin3;
+    private javax.swing.JLabel gambarmesin4;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton mesin1;
+    private javax.swing.JButton mesin2;
+    private javax.swing.JButton mesin3;
+    private javax.swing.JButton mesin4;
+    private javax.swing.JPanel panelgudangfinish;
+    private javax.swing.JPanel panelgudangppic;
+    private javax.swing.JPanel panelmap;
+    private javax.swing.JPanel panelmarketing;
+    private javax.swing.JPanel panelpabrik;
+    private javax.swing.JPanel panelsawah;
+    private diu.swe.habib.JPanelSlider.JPanelSlider panelutama;
+    private javax.swing.JLabel txtbbair;
+    private javax.swing.JLabel txtbbgandum;
+    private javax.swing.JLabel txtbbjagung;
+    private javax.swing.JLabel txtbmcoklat;
+    private javax.swing.JLabel txtbmkeju;
+    private javax.swing.JLabel txtbmplastik;
+    private javax.swing.JLabel txtbmsereal;
+    private javax.swing.JLabel txtserealcoklat;
+    private javax.swing.JLabel txtserealkeju;
+    private javax.swing.JLabel txtturbo;
     // End of variables declaration//GEN-END:variables
 }
