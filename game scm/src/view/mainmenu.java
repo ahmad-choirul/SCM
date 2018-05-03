@@ -15,16 +15,17 @@ import model.muser;
  *
  * @author acer
  */
-public class mainmenu extends masterview{
+public class mainmenu extends masterview {
 
     /**
      * Creates new form mainmenu
      */
     muser modeluser;
+
     public mainmenu() {
         try {
             initComponents();
-            modeluser= new muser();
+            modeluser = new muser();
         } catch (SQLException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,10 +110,10 @@ public class mainmenu extends masterview{
 
     private void btnplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnplayActionPerformed
         try {
-            String nama = JOptionPane.showInputDialog("masukan nama anda");
-            System.out.println("nama = "+nama);
-            modeluser.tambahuser(nama);
-            setwindows(new map(modeluser.getiduser(nama)));
+//            String nama = JOptionPane.showInputDialog("masukan nama anda");
+//            System.out.println("nama = "+nama);
+//            modeluser.tambahuser(nama);
+            setwindows(new map(modeluser.getiduser("abcd")));
         } catch (SQLException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,9 +6,12 @@
 package view;
 
 import java.sql.SQLException;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import model.mbarang;
+import model.muser;
 
 /**
  *
@@ -21,16 +24,72 @@ public class map extends masterview {
      */
     String id;
     mbarang modelbarang;
+    muser modeluser;
 
     public map(String id) {
         initComponents();
         this.setVisible(true);
+        start();
         try {
+            modeluser = new muser();
             modelbarang = new mbarang();
+            setupgradebarang();
             this.id = id;
-
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setupgradebarang() throws SQLException {
+        String data[] = modeluser.getupdatebarang(id);
+        for (int i = 0; i < 4; i++) {
+            setdetikloop[i] = Integer.parseInt(data[i + 1]);
+        }
+    }
+
+    public void start() {
+        mytimer.schedule(cek, 1000, 1000);//detik asli
+    }
+
+    public void stoptimer(boolean set) {
+        stopgame = set;
+    }
+    
+    TimerTask cek = new TimerTask() {
+        @Override
+        public void run() {
+            if (!stopgame) {
+                detik++;
+                System.out.println("cek " + detik);
+                for (int i = 0; i < 4; i++) {
+                    if (loop[i]) {
+                        System.out.println("ada yang true");
+                        loop[i] = false;
+                        getdetik[i] = detik + setdetikloop[i];
+                        System.out.println("get detik " + getdetik[0]);
+                    }
+                    if (getdetik[i] == detik) {
+                        seticonpngloop(i);
+                        System.out.println("ganti png");
+                    }
+                }
+            }
+        }
+    };
+
+    public void seticonpngloop(int i) {
+        System.out.println("seticonpngloop");
+        if (i == 0) {
+            seticonpng("mesin", labelmesin1);
+        }
+        if (i == 1) {
+            seticonpng("mesin", labelmesin2);
+        }
+        if (i == 2) {
+            seticonpng("mesinjadi", labelmesinjadi1);
+        }
+        if (i == 3) {
+            seticonpng("mesinjadi", labelmesinjadi2);
         }
     }
 
@@ -56,6 +115,14 @@ public class map extends masterview {
             txtbmcoklat.setText(data[10]);
             txtbmplastik.setText(data[11]);
             txtbmkeju.setText(data[12]);
+            txtbbjagung1.setText(data[5]);
+            txtbbgandum1.setText(data[6]);
+            txtbbsusu1.setText(data[7]);
+            txtbbgula1.setText(data[8]);
+            txtbmsereal1.setText(data[9]);
+            txtbmcoklat1.setText(data[10]);
+            txtbmplastik1.setText(data[11]);
+            txtbmkeju1.setText(data[12]);
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,32 +163,58 @@ public class map extends masterview {
         background5 = new javax.swing.JLabel();
         panelgudangppic = new javax.swing.JPanel();
         btnmap3 = new javax.swing.JButton();
+        panelbahan = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtbbjagung = new javax.swing.JLabel();
         txtbbgandum = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txtbbsusu = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        txtbbgula = new javax.swing.JLabel();
         txtbmsereal = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         txtbmcoklat = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         txtbmkeju = new javax.swing.JLabel();
         txtbmplastik = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        txtbbgula = new javax.swing.JLabel();
         background4 = new javax.swing.JLabel();
         panelpabrik = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        updatemesin1 = new javax.swing.JButton();
+        updatemesin2 = new javax.swing.JButton();
+        updatemesinjadi1 = new javax.swing.JButton();
+        updatemesinjadi2 = new javax.swing.JButton();
         btnmap1 = new javax.swing.JButton();
-        mesin2 = new javax.swing.JButton();
-        mesin3 = new javax.swing.JButton();
-        mesin4 = new javax.swing.JButton();
-        gambarmesin4 = new javax.swing.JLabel();
-        gambarmesin3 = new javax.swing.JLabel();
-        iconmesinjadi = new javax.swing.JLabel();
+        tmbmesinjadi1 = new javax.swing.JButton();
+        tmbmesin1 = new javax.swing.JButton();
+        tmbmesin2 = new javax.swing.JButton();
+        labelmesin2 = new javax.swing.JLabel();
+        labelmesin1 = new javax.swing.JLabel();
+        labelmesinjadi1 = new javax.swing.JLabel();
+        tmbmesinjadi2 = new javax.swing.JButton();
+        labelmesinjadi2 = new javax.swing.JLabel();
         background2 = new javax.swing.JLabel();
+        panelbahan1 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtbbjagung1 = new javax.swing.JLabel();
+        txtbbgandum1 = new javax.swing.JLabel();
+        txtbbsusu1 = new javax.swing.JLabel();
+        txtbbgula1 = new javax.swing.JLabel();
+        txtbmsereal1 = new javax.swing.JLabel();
+        txtbmcoklat1 = new javax.swing.JLabel();
+        txtbmkeju1 = new javax.swing.JLabel();
+        txtbmplastik1 = new javax.swing.JLabel();
         panelgudangfinish = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -319,61 +412,65 @@ public class map extends masterview {
         });
         panelgudangppic.add(btnmap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 660, 130, 90));
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_jagung.png"))); // NOI18N
-        panelgudangppic.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 90, 60));
-
-        txtbbjagung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbbjagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 70, 30));
-
-        txtbbgandum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbbgandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 70, 30));
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_gandum.png"))); // NOI18N
-        panelgudangppic.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 90, 60));
-
-        txtbbsusu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbbsusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 70, 30));
-
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_susu.png"))); // NOI18N
-        panelgudangppic.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 90, 60));
-
-        txtbmsereal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 70, 30));
-
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
-        panelgudangppic.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 90, 60));
-
-        txtbmcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 70, 30));
-
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_coklat.png"))); // NOI18N
-        panelgudangppic.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 90, 60));
-
-        txtbmkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, 70, 30));
-
-        txtbmplastik.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbmplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 70, 30));
+        panelbahan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_plastik.png"))); // NOI18N
-        panelgudangppic.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, 90, 60));
+        panelbahan.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, 90, 60));
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_keju.png"))); // NOI18N
-        panelgudangppic.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 90, 60));
+        panelbahan.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 90, 60));
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_coklat.png"))); // NOI18N
+        panelbahan.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 90, 60));
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
+        panelbahan.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 90, 60));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_gula.png"))); // NOI18N
-        panelgudangppic.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 60));
+        panelbahan.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 60));
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_susu.png"))); // NOI18N
+        panelbahan.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 90, 60));
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_gandum.png"))); // NOI18N
+        panelbahan.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 90, 60));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_jagung.png"))); // NOI18N
+        panelbahan.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 90, 60));
+
+        txtbbjagung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan.add(txtbbjagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 70, 30));
+
+        txtbbgandum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan.add(txtbbgandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 70, 30));
+
+        txtbbsusu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan.add(txtbbsusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 70, 30));
 
         txtbbgula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelgudangppic.add(txtbbgula, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 70, 30));
+        panelbahan.add(txtbbgula, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 70, 30));
+
+        txtbmsereal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 70, 30));
+
+        txtbmcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 70, 30));
+
+        txtbmkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan.add(txtbmkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, 70, 30));
+
+        txtbmplastik.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan.add(txtbmplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 70, 30));
+
+        panelgudangppic.add(panelbahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 140));
 
         background4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgppic.png"))); // NOI18N
         panelgudangppic.add(background4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
@@ -381,6 +478,45 @@ public class map extends masterview {
         panelutama.add(panelgudangppic, "card3");
 
         panelpabrik.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setText("update");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 5, -1, -1));
+
+        updatemesin1.setText("mesin1");
+        updatemesin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesin1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updatemesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        updatemesin2.setText("mesin2");
+        updatemesin2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesin2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updatemesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
+
+        updatemesinjadi1.setText("mesinjadi1");
+        updatemesinjadi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesinjadi1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updatemesinjadi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
+
+        updatemesinjadi2.setText("mesinjadi2");
+        updatemesinjadi2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesinjadi2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updatemesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, -1, -1));
+
+        panelpabrik.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 990, 440));
 
         btnmap1.setText("map");
         btnmap1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -391,52 +527,141 @@ public class map extends masterview {
         });
         panelpabrik.add(btnmap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1223, 10, 130, 90));
 
-        mesin2.setBorderPainted(false);
-        mesin2.setContentAreaFilled(false);
-        mesin2.setFocusPainted(false);
-        mesin2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tmbmesinjadi1.setBorderPainted(false);
+        tmbmesinjadi1.setContentAreaFilled(false);
+        tmbmesinjadi1.setFocusPainted(false);
+        tmbmesinjadi1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mesin2MouseClicked(evt);
+                tmbmesinjadi1MouseClicked(evt);
             }
         });
-        mesin2.addActionListener(new java.awt.event.ActionListener() {
+        tmbmesinjadi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mesin2ActionPerformed(evt);
+                tmbmesinjadi1ActionPerformed(evt);
             }
         });
-        panelpabrik.add(mesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 350, 350));
+        panelpabrik.add(tmbmesinjadi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 350, 340));
 
-        mesin3.setBorderPainted(false);
-        mesin3.setContentAreaFilled(false);
-        mesin3.setFocusPainted(false);
-        mesin3.addMouseListener(new java.awt.event.MouseAdapter() {
+        tmbmesin1.setBorderPainted(false);
+        tmbmesin1.setContentAreaFilled(false);
+        tmbmesin1.setFocusPainted(false);
+        tmbmesin1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mesin3MouseClicked(evt);
+                tmbmesin1MouseClicked(evt);
             }
         });
-        panelpabrik.add(mesin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 280, 250));
+        tmbmesin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tmbmesin1ActionPerformed(evt);
+            }
+        });
+        panelpabrik.add(tmbmesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 100, 280, 250));
 
-        mesin4.setBorderPainted(false);
-        mesin4.setContentAreaFilled(false);
-        mesin4.setFocusPainted(false);
-        mesin4.setVerifyInputWhenFocusTarget(false);
-        mesin4.addMouseListener(new java.awt.event.MouseAdapter() {
+        tmbmesin2.setBorderPainted(false);
+        tmbmesin2.setContentAreaFilled(false);
+        tmbmesin2.setFocusPainted(false);
+        tmbmesin2.setVerifyInputWhenFocusTarget(false);
+        tmbmesin2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mesin4MouseClicked(evt);
+                tmbmesin2MouseClicked(evt);
             }
         });
-        panelpabrik.add(mesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 350, 260, 250));
+        tmbmesin2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tmbmesin2ActionPerformed(evt);
+            }
+        });
+        panelpabrik.add(tmbmesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 370, 260, 250));
 
-        gambarmesin4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
-        panelpabrik.add(gambarmesin4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 340, 250, 260));
+        labelmesin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
+        panelpabrik.add(labelmesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 370, 250, 260));
 
-        gambarmesin3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
-        panelpabrik.add(gambarmesin3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, 250, 260));
+        labelmesin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesin.png"))); // NOI18N
+        panelpabrik.add(labelmesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 100, 250, 260));
 
-        iconmesinjadi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesindiam.png"))); // NOI18N
-        iconmesinjadi.setToolTipText("");
-        panelpabrik.add(iconmesinjadi, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 350, 340));
-        panelpabrik.add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 1370, 770));
+        labelmesinjadi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesinjadi.png"))); // NOI18N
+        labelmesinjadi1.setToolTipText("");
+        panelpabrik.add(labelmesinjadi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 350, 340));
+
+        tmbmesinjadi2.setBorderPainted(false);
+        tmbmesinjadi2.setContentAreaFilled(false);
+        tmbmesinjadi2.setFocusPainted(false);
+        tmbmesinjadi2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tmbmesinjadi2MouseClicked(evt);
+            }
+        });
+        tmbmesinjadi2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tmbmesinjadi2ActionPerformed(evt);
+            }
+        });
+        panelpabrik.add(tmbmesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 350, 330));
+
+        labelmesinjadi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesinjadi.png"))); // NOI18N
+        labelmesinjadi2.setToolTipText("");
+        panelpabrik.add(labelmesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 350, 340));
+        panelpabrik.add(background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1370, 770));
+
+        panelbahan1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_plastik.png"))); // NOI18N
+        panelbahan1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, 90, 60));
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_keju.png"))); // NOI18N
+        panelbahan1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 90, 60));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_coklat.png"))); // NOI18N
+        panelbahan1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 90, 60));
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
+        panelbahan1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 90, 60));
+
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_gula.png"))); // NOI18N
+        panelbahan1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 60));
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_susu.png"))); // NOI18N
+        panelbahan1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 90, 60));
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_gandum.png"))); // NOI18N
+        panelbahan1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 90, 60));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_jagung.png"))); // NOI18N
+        panelbahan1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 90, 60));
+
+        txtbbjagung1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbbjagung1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 70, 30));
+
+        txtbbgandum1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbbgandum1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 70, 30));
+
+        txtbbsusu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbbsusu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 70, 30));
+
+        txtbbgula1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbbgula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 70, 30));
+
+        txtbmsereal1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbmsereal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 70, 30));
+
+        txtbmcoklat1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbmcoklat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 70, 30));
+
+        txtbmkeju1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbmkeju1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, 70, 30));
+
+        txtbmplastik1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelbahan1.add(txtbmplastik1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 70, 30));
+
+        panelpabrik.add(panelbahan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 140));
 
         panelutama.add(panelpabrik, "card3");
 
@@ -509,6 +734,7 @@ public class map extends masterview {
 
     private void btnparikMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnparikMouseClicked
 //        setwindows(new pabrik());
+        setgudangppic();
         panelutama.nextPanel(25, panelpabrik, panelutama.right);
     }//GEN-LAST:event_btnparikMouseClicked
 
@@ -536,17 +762,16 @@ public class map extends masterview {
         panelutama.nextPanel(25, panelmap, panelutama.left);
     }//GEN-LAST:event_btnmap1ActionPerformed
 
-    private void mesin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin2MouseClicked
-        seticongif("mesingif", iconmesinjadi);
-    }//GEN-LAST:event_mesin2MouseClicked
+    private void tmbmesinjadi1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tmbmesinjadi1MouseClicked
+    }//GEN-LAST:event_tmbmesinjadi1MouseClicked
 
-    private void mesin3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin3MouseClicked
-        seticongif("mesingif", gambarmesin3);
-    }//GEN-LAST:event_mesin3MouseClicked
+    private void tmbmesin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tmbmesin1MouseClicked
 
-    private void mesin4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mesin4MouseClicked
-        seticongif("mesingif", gambarmesin4);
-    }//GEN-LAST:event_mesin4MouseClicked
+    }//GEN-LAST:event_tmbmesin1MouseClicked
+
+    private void tmbmesin2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tmbmesin2MouseClicked
+
+    }//GEN-LAST:event_tmbmesin2MouseClicked
 
     private void btnmap2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmap2ActionPerformed
 //        setwindows(new map());
@@ -567,9 +792,45 @@ public class map extends masterview {
         // TODO add your handling code here:
     }//GEN-LAST:event_btngudangppicActionPerformed
 
-    private void mesin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesin2ActionPerformed
-        seticongif("mesin2", iconmesinjadi);
-    }//GEN-LAST:event_mesin2ActionPerformed
+    private void tmbmesinjadi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbmesinjadi1ActionPerformed
+        seticongif("mesinjadi", labelmesinjadi1);
+        loop[2] = true;
+    }//GEN-LAST:event_tmbmesinjadi1ActionPerformed
+
+    private void tmbmesin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbmesin1ActionPerformed
+        seticongif("mesin", labelmesin1);
+        loop[0] = true;
+    }//GEN-LAST:event_tmbmesin1ActionPerformed
+
+    private void tmbmesinjadi2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tmbmesinjadi2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tmbmesinjadi2MouseClicked
+
+    private void tmbmesinjadi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbmesinjadi2ActionPerformed
+        seticongif("mesinjadi", labelmesinjadi2);
+        loop[3] = true;
+    }//GEN-LAST:event_tmbmesinjadi2ActionPerformed
+
+    private void tmbmesin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbmesin2ActionPerformed
+        seticongif("mesin", labelmesin2);
+        loop[1] = true;
+    }//GEN-LAST:event_tmbmesin2ActionPerformed
+
+    private void updatemesin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesin1ActionPerformed
+        setdetikloop[0] -= 1;
+    }//GEN-LAST:event_updatemesin1ActionPerformed
+
+    private void updatemesin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesin2ActionPerformed
+        setdetikloop[1] -= 1;
+    }//GEN-LAST:event_updatemesin2ActionPerformed
+
+    private void updatemesinjadi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesinjadi1ActionPerformed
+        setdetikloop[2] -= 1;
+    }//GEN-LAST:event_updatemesinjadi1ActionPerformed
+
+    private void updatemesinjadi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesinjadi2ActionPerformed
+        setdetikloop[0] -=1;
+    }//GEN-LAST:event_updatemesinjadi2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -624,9 +885,6 @@ public class map extends masterview {
     private javax.swing.JButton btnmarketing;
     private javax.swing.JButton btnparik;
     private javax.swing.JButton btnsawah;
-    private javax.swing.JLabel gambarmesin3;
-    private javax.swing.JLabel gambarmesin4;
-    private javax.swing.JLabel iconmesinjadi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton15;
@@ -636,25 +894,38 @@ public class map extends masterview {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JButton mesin2;
-    private javax.swing.JButton mesin3;
-    private javax.swing.JButton mesin4;
+    private javax.swing.JLabel labelmesin1;
+    private javax.swing.JLabel labelmesin2;
+    private javax.swing.JLabel labelmesinjadi1;
+    private javax.swing.JLabel labelmesinjadi2;
+    private javax.swing.JPanel panelbahan;
+    private javax.swing.JPanel panelbahan1;
     private javax.swing.JPanel panelgudangfinish;
     private javax.swing.JPanel panelgudangppic;
     private javax.swing.JPanel panelmap;
@@ -662,16 +933,32 @@ public class map extends masterview {
     private javax.swing.JPanel panelpabrik;
     private javax.swing.JPanel panelsawah;
     private diu.swe.habib.JPanelSlider.JPanelSlider panelutama;
+    private javax.swing.JButton tmbmesin1;
+    private javax.swing.JButton tmbmesin2;
+    private javax.swing.JButton tmbmesinjadi1;
+    private javax.swing.JButton tmbmesinjadi2;
     private javax.swing.JLabel txtbbgandum;
+    private javax.swing.JLabel txtbbgandum1;
     private javax.swing.JLabel txtbbgula;
+    private javax.swing.JLabel txtbbgula1;
     private javax.swing.JLabel txtbbjagung;
+    private javax.swing.JLabel txtbbjagung1;
     private javax.swing.JLabel txtbbsusu;
+    private javax.swing.JLabel txtbbsusu1;
     private javax.swing.JLabel txtbmcoklat;
+    private javax.swing.JLabel txtbmcoklat1;
     private javax.swing.JLabel txtbmkeju;
+    private javax.swing.JLabel txtbmkeju1;
     private javax.swing.JLabel txtbmplastik;
+    private javax.swing.JLabel txtbmplastik1;
     private javax.swing.JLabel txtbmsereal;
+    private javax.swing.JLabel txtbmsereal1;
     private javax.swing.JLabel txtserealcoklat;
     private javax.swing.JLabel txtserealkeju;
     private javax.swing.JLabel txtturbo;
+    private javax.swing.JButton updatemesin1;
+    private javax.swing.JButton updatemesin2;
+    private javax.swing.JButton updatemesinjadi1;
+    private javax.swing.JButton updatemesinjadi2;
     // End of variables declaration//GEN-END:variables
 }

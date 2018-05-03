@@ -32,6 +32,12 @@ public String[] cekbarang(String id) throws SQLException {
             return getdataid(query, kolom);
 
     }
+public String[] getupdatebarang(String id) throws SQLException {
+            String kolom[] = {"id_user","mesin1","mesin2","mesinjadi1","mesinjadi2","mobil1","mobil2"};
+            String query = "select * from upgrade where id_user = " + id;
+            return getdataid(query, kolom);
+
+    }
     public boolean updatebarang(String data[]) {
         String query = "UPDATE `barang` SET `nama_barang`='" + data[1] + "',`harga_beli`='" + data[2] + "',`harga_jual`='" + data[3] + "',"
                 + "`stok`='" + data[4] + "',`keterangan`='" + data[5] + "' where `kd_barang`='" + data[0] + "' ";
