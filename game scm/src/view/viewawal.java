@@ -55,7 +55,7 @@ public class viewawal extends masterview {
         getContentPane().add(btnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 230, 170));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgplay.png"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1360, 770));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

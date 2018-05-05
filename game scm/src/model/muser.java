@@ -34,7 +34,8 @@ public String[] cekbarang(String id) throws SQLException {
     }
 public String[] getupdatebarang(String id) throws SQLException {
             String kolom[] = {"id_user","mesin1","mesin2","mesinjadi1","mesinjadi2","mobil1","mobil2"};
-            String query = "select * from upgrade where id_user = " + id;
+            String query = "SELECT * FROM `upgrade` WHERE `id_user` =" + id;
+            System.out.println("query = "+query);
             return getdataid(query, kolom);
 
     }

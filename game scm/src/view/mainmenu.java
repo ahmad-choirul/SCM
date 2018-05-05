@@ -54,7 +54,6 @@ public class mainmenu extends masterview {
         btnexit.setBorderPainted(false);
         btnexit.setContentAreaFilled(false);
         btnexit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnexit.setOpaque(false);
         btnexit.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/b_back2.png"))); // NOI18N
         btnexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,17 +102,18 @@ public class mainmenu extends masterview {
         getContentPane().add(btnscore, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 510, 610, 130));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgmainmenu.png"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 760));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnplayActionPerformed
         try {
-//            String nama = JOptionPane.showInputDialog("masukan nama anda");
-//            System.out.println("nama = "+nama);
-//            modeluser.tambahuser(nama);
-            setwindows(new map(modeluser.getiduser("abcd")));
+            String nama = JOptionPane.showInputDialog("masukan nama anda");
+            System.out.println("nama = "+nama);
+            modeluser.tambahuser(nama);
+            setwindows(new map(modeluser.getiduser(nama)));
+//            System.out.println("id user ="+modeluser.getiduser("abcd"));
         } catch (SQLException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
         }
