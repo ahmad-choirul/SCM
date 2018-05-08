@@ -109,7 +109,8 @@ public class mainmenu extends masterview {
 
     private void btnplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnplayActionPerformed
         try {
-            String nama = JOptionPane.showInputDialog("masukan nama anda");
+            String nama = "abcd";
+//            String nama = JOptionPane.showInputDialog("masukan nama anda");
             System.out.println("nama = "+nama);
             modeluser.tambahuser(nama);
             setwindows(new map(modeluser.getiduser(nama)));

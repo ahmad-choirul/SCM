@@ -51,7 +51,6 @@ public class koneksi {
         if (rs.next()) {
             for (int i = 0; i < data.length; i++) {
                 data[i] = rs.getString(i + 1);
-                System.out.println(data[i]);
             }
         }
 

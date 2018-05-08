@@ -35,9 +35,11 @@ public class mbarang extends koneksi {
             "bmcoklat", "bmplastik", "bmkeju", "bjserealcoklat", "bjserealkeju", "bjturbo"};
         String query = "select * from user where id_user = " + id;
         return getdataid(query, kolom);
-
     }
-
+ public boolean jualbarang(String barang,String jumlah,String id) {
+        String query2 = "UPDATE `user` SET `"+barang+"` = "+barang+"-'"+jumlah+"' WHERE `user`.`id_user` = "+id+";";
+        return execute(query2);
+    }
     public String[] getdatawithid(String kodebarang) throws SQLException {
         String kolom[] = {"kd_barang", "nama barang", "harga_jual", "stok", "keterangan"};
         String query = "SELECT * FROM `barang` where kd_barang = '" + kodebarang + "' ";

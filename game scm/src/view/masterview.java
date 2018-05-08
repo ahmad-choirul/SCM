@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 public class masterview extends javax.swing.JFrame {
 
     Timer mytimer = new Timer();
+    Timer mytimer2 = new Timer();
     boolean stopgame = false;
     int detik = 0;
     boolean loop[] = {false, false, false, false};
