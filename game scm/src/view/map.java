@@ -30,7 +30,7 @@ public class map extends masterview {
     byte pillihidmesin;
     boolean gerakmobil = false;
     boolean kanan = true;
-
+    String produkproduksi[] = {null,null,null,null};
     public map(String id) {
         initComponents();
         this.setVisible(true);
@@ -85,6 +85,7 @@ public class map extends masterview {
                     }
                     if (getdetik[i] == detik) {
                         seticonpngloop(i);
+                        tambahproduksi(produkproduksi[i]);
                         System.out.println("ganti png");
                     }
                     if (gerakmobil) {
@@ -101,7 +102,20 @@ public class map extends masterview {
             setgerakpanel();
         }
     };
-
+public void tambahproduksi (String idproduksi){
+    if (idproduksi.equalsIgnoreCase("1")) {
+        //proses turbo
+        modelbarang.tambahproduksi("bjturbo", "100", id);
+    }
+    if (idproduksi.equalsIgnoreCase("2")) {
+        //proses keju
+        modelbarang.tambahproduksi("bjserealkeju", "100", id);
+    }
+    if (idproduksi.equalsIgnoreCase("3")) {
+        //proses coklat
+        modelbarang.tambahproduksi("bjserealcoklat", "100", id);
+    }
+}
     public void setgerakpanel() {
         if (kanan) {
             panelgerak.setLocation(panelgerak.getX() + 10, panelgerak.getY());
@@ -279,6 +293,7 @@ public class map extends masterview {
         tmbproduksicoklat = new javax.swing.JButton();
         tmbproduksiturbo = new javax.swing.JButton();
         tmbproduksikeju = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         tmbmesinjadi2 = new javax.swing.JButton();
@@ -814,31 +829,43 @@ public class map extends masterview {
         popupmesinjadi.setOpaque(false);
         popupmesinjadi.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tmbproduksicoklat.setText("sereal coklat");
+        tmbproduksicoklat.setBorderPainted(false);
+        tmbproduksicoklat.setContentAreaFilled(false);
+        tmbproduksicoklat.setFocusPainted(false);
+        tmbproduksicoklat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/btn_serco.png"))); // NOI18N
         tmbproduksicoklat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tmbproduksicoklatActionPerformed(evt);
             }
         });
-        popupmesinjadi.add(tmbproduksicoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 120, 100));
+        popupmesinjadi.add(tmbproduksicoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 230, 100));
 
-        tmbproduksiturbo.setText("turbo");
+        tmbproduksiturbo.setBorderPainted(false);
+        tmbproduksiturbo.setContentAreaFilled(false);
+        tmbproduksiturbo.setFocusPainted(false);
+        tmbproduksiturbo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/btn_turbo.png"))); // NOI18N
         tmbproduksiturbo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tmbproduksiturboActionPerformed(evt);
             }
         });
-        popupmesinjadi.add(tmbproduksiturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 120, 100));
+        popupmesinjadi.add(tmbproduksiturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 240, 90));
 
-        tmbproduksikeju.setText("sereal keju");
+        tmbproduksikeju.setBorderPainted(false);
+        tmbproduksikeju.setContentAreaFilled(false);
+        tmbproduksikeju.setFocusPainted(false);
+        tmbproduksikeju.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/btn_serkeju.png"))); // NOI18N
         tmbproduksikeju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tmbproduksikejuActionPerformed(evt);
             }
         });
-        popupmesinjadi.add(tmbproduksikeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 120, 100));
+        popupmesinjadi.add(tmbproduksikeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 230, 90));
 
-        panel2.add(popupmesinjadi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 310, -1));
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgpopup.png"))); // NOI18N
+        popupmesinjadi.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 400));
+
+        panel2.add(popupmesinjadi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 300, 400));
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("mesin 2");
@@ -1154,7 +1181,6 @@ public class map extends masterview {
 
         txtbmplastik1.setForeground(new java.awt.Color(255, 255, 255));
         txtbmplastik1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtbmplastik1.setText("asfas");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 14;
         gridBagConstraints.gridy = 1;
@@ -1300,7 +1326,7 @@ public class map extends masterview {
 
     private void tmbmesinjadi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbmesinjadi1ActionPerformed
         popupmesinjadi.setVisible(true);
-cekproduksi();
+        cekproduksi();
         pillihidmesin = 2;
     }//GEN-LAST:event_tmbmesinjadi1ActionPerformed
 
@@ -1395,22 +1421,29 @@ cekproduksi();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void tmbproduksiturboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbproduksiturboActionPerformed
-        if (Integer.parseInt(txtbbjagung1.getText()) >= 90 && Integer.parseInt(txtbbgula1.getText()) >= 25 && Integer.parseInt(txtbbsusu1.getText()) >= 10 && Integer.parseInt(txtbmplastik1.getText()) >= 400) {
-            modelbarang.jualbarang("bbjagung", "90", id);
-            modelbarang.jualbarang("bbgula", "25", id);
-            modelbarang.jualbarang("bbsusu", "10", id);
-            modelbarang.jualbarang("bmplastik", "400", id);
-            prosesmesin(pillihidmesin);
-        } else {
-
-        }
+        produkproduksi[pillihidmesin]="1";
+        modelbarang.jualbarang("bbjagung", "90", id);
+        modelbarang.jualbarang("bbgula", "25", id);
+        modelbarang.jualbarang("bbsusu", "10", id);
+        modelbarang.jualbarang("bmplastik", "400", id);
+        prosesmesin(pillihidmesin);
     }//GEN-LAST:event_tmbproduksiturboActionPerformed
 
     private void tmbproduksikejuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbproduksikejuActionPerformed
+       produkproduksi[pillihidmesin]="2";
+        modelbarang.jualbarang("bbjagung", "90", id);
+        modelbarang.jualbarang("bbgula", "25", id);
+        modelbarang.jualbarang("bbsusu", "10", id);
+        modelbarang.jualbarang("bmplastik", "400", id);
         prosesmesin(pillihidmesin);
     }//GEN-LAST:event_tmbproduksikejuActionPerformed
 
     private void tmbproduksicoklatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbproduksicoklatActionPerformed
+        produkproduksi[pillihidmesin]="3";
+        modelbarang.jualbarang("bbjagung", "90", id);
+        modelbarang.jualbarang("bbgula", "25", id);
+        modelbarang.jualbarang("bbsusu", "10", id);
+        modelbarang.jualbarang("bmplastik", "400", id);
         prosesmesin(pillihidmesin);
     }//GEN-LAST:event_tmbproduksicoklatActionPerformed
 
@@ -1520,6 +1553,7 @@ cekproduksi();
                 break;
         }
         loop[idmesin] = true;
+        setgudangppic();
     }
 
     /**
@@ -1623,6 +1657,7 @@ cekproduksi();
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

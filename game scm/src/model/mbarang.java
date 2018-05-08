@@ -20,8 +20,8 @@ public class mbarang extends koneksi {
         super();
     }
 
-    public boolean belibarang(String barang,String jumlah,String uang, String id) {
-        String query2 = "UPDATE `user` SET `"+barang+"` = "+barang+"+'"+jumlah+"' WHERE `user`.`id_user` = "+id+";";
+    public boolean belibarang(String barang, String jumlah, String uang, String id) {
+        String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "+'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
         String query = "UPDATE `user` SET `uang` = uang-'" + uang + "' WHERE `user`.`id_user` = " + id + " ";
         if (execute(query)) {
             return execute(query2);
@@ -36,10 +36,17 @@ public class mbarang extends koneksi {
         String query = "select * from user where id_user = " + id;
         return getdataid(query, kolom);
     }
- public boolean jualbarang(String barang,String jumlah,String id) {
-        String query2 = "UPDATE `user` SET `"+barang+"` = "+barang+"-'"+jumlah+"' WHERE `user`.`id_user` = "+id+";";
+
+    public boolean jualbarang(String barang, String jumlah, String id) {
+        String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "-'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
         return execute(query2);
     }
+
+    public boolean tambahproduksi(String barang, String jumlah, String id) {
+        String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "+'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
+        return execute(query2);
+    }
+
     public String[] getdatawithid(String kodebarang) throws SQLException {
         String kolom[] = {"kd_barang", "nama barang", "harga_jual", "stok", "keterangan"};
         String query = "SELECT * FROM `barang` where kd_barang = '" + kodebarang + "' ";
