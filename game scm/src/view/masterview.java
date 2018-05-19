@@ -5,11 +5,9 @@
  */
 package view;
 
-import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -71,6 +69,9 @@ public class masterview extends javax.swing.JFrame {
     }
 
     public void seticonpng(String file, JLabel btn) {
+        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/" + file + ".png")));
+    }
+    public void seticonpng(String file, JButton btn) {
         btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/" + file + ".png")));
     }
 

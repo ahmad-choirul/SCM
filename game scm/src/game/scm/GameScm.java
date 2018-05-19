@@ -5,6 +5,7 @@
  */
 package game.scm;
 
+import view.mainmenu;
 import view.viewawal;
 
 /**
@@ -17,7 +18,7 @@ public class GameScm {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        viewawal a = new viewawal();
+        mainmenu a = new mainmenu();
         a.setVisible(true);
     }
     
