@@ -300,13 +300,6 @@ public class map extends masterview {
         upgrademobil = new javax.swing.JButton();
         background4 = new javax.swing.JLabel();
         panelpabrik = new javax.swing.JPanel();
-        upgrademesin = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        updatemesin1 = new javax.swing.JButton();
-        updatemesin2 = new javax.swing.JButton();
-        updatemesinjadi1 = new javax.swing.JButton();
-        updatemesinjadi2 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
         jButton26 = new javax.swing.JButton();
         panelutamapabrik = new diu.swe.habib.JPanelSlider.JPanelSlider();
@@ -322,6 +315,14 @@ public class map extends masterview {
         tmbmesinjadi1 = new javax.swing.JButton();
         labelmesinjadi1 = new javax.swing.JLabel();
         labelmesinjadi2 = new javax.swing.JLabel();
+        upgrademesin = new javax.swing.JPanel();
+        upback = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        updatemesin1 = new javax.swing.JButton();
+        updatemesin2 = new javax.swing.JButton();
+        updatemesinjadi1 = new javax.swing.JButton();
+        updatemesinjadi2 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
         panel1 = new javax.swing.JPanel();
         popupmesin = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
@@ -855,53 +856,9 @@ public class map extends masterview {
 
         panelpabrik.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        upgrademesin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setText("update");
-        upgrademesin.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 5, -1, -1));
-
-        updatemesin1.setText("mesin1");
-        updatemesin1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesin1ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
-
-        updatemesin2.setText("mesin2");
-        updatemesin2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesin2ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
-
-        updatemesinjadi1.setText("mesinjadi1");
-        updatemesinjadi1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesinjadi1ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesinjadi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
-
-        updatemesinjadi2.setText("mesinjadi2");
-        updatemesinjadi2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesinjadi2ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, -1, -1));
-
-        jButton16.setText("ok");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, -1, -1));
-
-        panelpabrik.add(upgrademesin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
+        jButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/next1.png"))); // NOI18N
+        jButton25.setBorder(null);
+        jButton25.setBorderPainted(false);
         jButton25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton25ActionPerformed(evt);
@@ -909,6 +866,9 @@ public class map extends masterview {
         });
         panelpabrik.add(jButton25, new org.netbeans.lib.awtextra.AbsoluteConstraints(1199, 350, 100, 75));
 
+        jButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/next2.png"))); // NOI18N
+        jButton26.setBorder(null);
+        jButton26.setBorderPainted(false);
         jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton26ActionPerformed(evt);
@@ -1008,6 +968,57 @@ public class map extends masterview {
         labelmesinjadi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mesinjadi.png"))); // NOI18N
         labelmesinjadi2.setToolTipText("");
         panel2.add(labelmesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 350, 340));
+
+        upgrademesin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        upback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/upgradeback.jpg"))); // NOI18N
+        upback.setText("jLabel27");
+        upgrademesin.add(upback, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 320));
+
+        jLabel6.setText("update");
+        upgrademesin.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 5, -1, -1));
+
+        updatemesin1.setText("mesin1");
+        updatemesin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesin1ActionPerformed(evt);
+            }
+        });
+        upgrademesin.add(updatemesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        updatemesin2.setText("mesin2");
+        updatemesin2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesin2ActionPerformed(evt);
+            }
+        });
+        upgrademesin.add(updatemesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
+
+        updatemesinjadi1.setText("mesinjadi1");
+        updatemesinjadi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesinjadi1ActionPerformed(evt);
+            }
+        });
+        upgrademesin.add(updatemesinjadi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
+
+        updatemesinjadi2.setText("mesinjadi2");
+        updatemesinjadi2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemesinjadi2ActionPerformed(evt);
+            }
+        });
+        upgrademesin.add(updatemesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, -1, -1));
+
+        jButton16.setText("ok");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+        upgrademesin.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, -1, -1));
+
+        panel2.add(upgrademesin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 800, 320));
 
         panelutamapabrik.add(panel2, "card2");
 
@@ -1875,6 +1886,7 @@ public class map extends masterview {
     private javax.swing.JLabel txtserealkeju;
     private javax.swing.JLabel txtturbo;
     private javax.swing.JLabel txtuang;
+    private javax.swing.JLabel upback;
     private javax.swing.JButton updatemesin1;
     private javax.swing.JButton updatemesin2;
     private javax.swing.JButton updatemesinjadi1;
