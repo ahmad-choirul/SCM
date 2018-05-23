@@ -247,7 +247,6 @@ public class map extends masterview {
         gandum = new javax.swing.JButton();
         btnmap4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         txtsawah2 = new javax.swing.JButton();
         txtsawah1 = new javax.swing.JButton();
@@ -515,7 +514,12 @@ public class map extends masterview {
 
         popuppiltanaman.setLayout(new java.awt.GridBagLayout());
 
-        jagung.setText("jButton7");
+        jagung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_jagung.png"))); // NOI18N
+        jagung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jagungActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -525,7 +529,7 @@ public class map extends masterview {
         gridBagConstraints.insets = new java.awt.Insets(30, 50, 20, 60);
         popuppiltanaman.add(jagung, gridBagConstraints);
 
-        gandum.setText("gandum");
+        gandum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_gandum.png"))); // NOI18N
         gandum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gandumActionPerformed(evt);
@@ -540,37 +544,42 @@ public class map extends masterview {
         gridBagConstraints.insets = new java.awt.Insets(30, 50, 0, 60);
         popuppiltanaman.add(gandum, gridBagConstraints);
 
-        panelsawah.add(popuppiltanaman, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 220, 300));
+        panelsawah.add(popuppiltanaman, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 190, 390));
 
-        btnmap4.setText("map");
+        btnmap4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/map1.png"))); // NOI18N
+        btnmap4.setBorder(null);
+        btnmap4.setBorderPainted(false);
         btnmap4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnmap4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnmap4ActionPerformed(evt);
             }
         });
-        panelsawah.add(btnmap4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 660, 130, 90));
+        panelsawah.add(btnmap4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 650, 130, 90));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/tpanen1.png"))); // NOI18N
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
         jButton3.setFocusPainted(false);
         jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/tpanen2.png"))); // NOI18N
-        panelsawah.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 120, 170, 160));
-
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/air.png"))); // NOI18N
-        jButton13.setBorderPainted(false);
-        jButton13.setContentAreaFilled(false);
-        jButton13.setFocusPainted(false);
-        jButton13.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/air1.png"))); // NOI18N
-        panelsawah.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 280, 170, 160));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        panelsawah.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 450, 170, 160));
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ttanam1.png"))); // NOI18N
         jButton15.setBorderPainted(false);
         jButton15.setContentAreaFilled(false);
         jButton15.setFocusPainted(false);
         jButton15.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/ttanam2.png"))); // NOI18N
-        panelsawah.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 440, 170, 160));
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        panelsawah.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 310, 170, 160));
 
         txtsawah2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/sawah0.png"))); // NOI18N
         txtsawah2.setBorderPainted(false);
@@ -581,7 +590,7 @@ public class map extends masterview {
                 txtsawah2ActionPerformed(evt);
             }
         });
-        panelsawah.add(txtsawah2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 360, 370));
+        panelsawah.add(txtsawah2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 360, 370));
 
         txtsawah1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/sawah0.png"))); // NOI18N
         txtsawah1.setBorderPainted(false);
@@ -592,7 +601,7 @@ public class map extends masterview {
                 txtsawah1ActionPerformed(evt);
             }
         });
-        panelsawah.add(txtsawah1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 360, 370));
+        panelsawah.add(txtsawah1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 360, 370));
 
         background5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgsawah.jpg"))); // NOI18N
         panelsawah.add(background5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
@@ -1640,6 +1649,24 @@ public class map extends masterview {
     private void upgrademobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upgrademobilActionPerformed
         kecepatan++;
     }//GEN-LAST:event_upgrademobilActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jagungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jagungActionPerformed
+             if (pilsawah == 0) {
+            seticonpng("gandum1", txtsawah1);
+        }
+        if (pilsawah == 1) {
+            seticonpng("gandum1", txtsawah2);
+        }
+        popuppiltanaman.setVisible(false);
+    }//GEN-LAST:event_jagungActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        popuppiltanaman.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
     public void setenabelbtnbeli(boolean bool) {
         btnbelicoklat.setEnabled(bool);
         btnbeligandum.setEnabled(bool);
@@ -1772,7 +1799,6 @@ public class map extends masterview {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
