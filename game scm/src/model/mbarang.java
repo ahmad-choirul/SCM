@@ -36,6 +36,11 @@ public class mbarang extends koneksi {
         String query = "select * from user where id_user = " + id;
         return getdataid(query, kolom);
     }
+    public String[] cekbibit(String id) throws SQLException {
+        String kolom[] = {"bbjagung", "bbgandum"};
+        String query = "select bbjagung,bbgandum from user where id_user = " + id;
+        return getdataid(query, kolom);
+    }
 
     public boolean jualbarang(String barang, String jumlah, String id) {
         String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "-'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";

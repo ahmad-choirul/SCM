@@ -10,6 +10,7 @@ import java.util.TimerTask;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +25,7 @@ public class masterview extends javax.swing.JFrame {
     boolean loop[] = {false, false, false, false};
     boolean change[] = {false, false, false, false};
     int getdetik[] = {0, 0, 0, 0};
-    int setdetikloop[]={10,10,10,10};
+    int setdetikloop[] = {10, 10, 10, 10};
     //getdetik 0= mesinjadi1
     //getdetik 1= mesinjadi2
     //getdetik 2= mesin1
@@ -34,6 +35,7 @@ public class masterview extends javax.swing.JFrame {
         a.setVisible(true);
         this.dispose();
     }
+
     public void start() {
 //        mainMusik(musikmain);
         //sehari = 5 detik,perawatan = 15 detik
@@ -64,6 +66,10 @@ public class masterview extends javax.swing.JFrame {
         }
     };
 
+    public void message(String txt) {
+        JOptionPane.showMessageDialog(null, txt, "error", JOptionPane.OK_OPTION);
+    }
+
     public void seticongif(String file, JLabel btn) {
         btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/" + file + ".gif")));
     }
@@ -71,6 +77,7 @@ public class masterview extends javax.swing.JFrame {
     public void seticonpng(String file, JLabel btn) {
         btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/" + file + ".png")));
     }
+
     public void seticonpng(String file, JButton btn) {
         btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/" + file + ".png")));
     }
