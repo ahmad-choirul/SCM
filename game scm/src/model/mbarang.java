@@ -31,8 +31,7 @@ public class mbarang extends koneksi {
     }
 
     public String[] cekbarang(String id) throws SQLException {
-        String kolom[] = {"id_user", "nama", "score", "scorepopularitas", "uang", "bbjagung", "bbgandum", "bbsusu", "bbgula", "bmsereal",
-            "bmcoklat", "bmplastik", "bmkeju", "bjserealcoklat", "bjserealkeju", "bjturbo"};
+        String kolom[] = {"id_user", "nama", "score", "scorepopularitas", "uang", "bbjagung", "bbgandum", "bbsusu", "bbgula","bmcoklat", "bmplastik", "bmkeju", "bjserealcoklat", "bjserealkeju", "bjturbo"};
         String query = "select * from user where id_user = " + id;
         return getdataid(query, kolom);
     }

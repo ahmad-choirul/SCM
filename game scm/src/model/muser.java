@@ -20,14 +20,13 @@ public class muser extends koneksi {
 
    public boolean tambahuser(String nama) {
         System.out.println("tambah user");
-        String query = "INSERT INTO `user` (`id_user`, `nama`, `score`, `scorepopularitas`, `uang`, `bbjagung`, `bbgandum`, `bbsusu`, `bbgula`, `bmsereal`, `bmcoklat`, `bmplastik`, `bmkeju`, `bjserealcoklat`, `bjserealkeju`, `bjturbo`) VALUES "
+        String query = "INSERT INTO `user` (`id_user`, `nama`, `score`, `scorepopularitas`, `uang`, `bbjagung`, `bbgandum`, `bbsusu`, `bbgula`, `bmcoklat`, `bmplastik`, `bmkeju`, `bjserealcoklat`, `bjserealkeju`, `bjturbo`) VALUES "
                 + "(NULL, '"+nama+"', '0', '100', '1000', '10', '10', '100', '100', '2', '2', '5', '2', '0', '0', '0');";
         System.out.println(query);
         return execute(query);
     }
 public String[] cekbarang(String id) throws SQLException {
-            String kolom[] = {"id_user","nama","score","scorepopularitas","uang","bbjagung","bbgandum","bbsusu","bbgula","bmsereal",
-                "bmcoklat","bmplastik","bmkeju","bjserealcoklat","bjserealkeju","bjturbo"};
+            String kolom[] = {"id_user","nama","score","scorepopularitas","uang","bbjagung","bbgandum","bbsusu","bbgula","bmcoklat","bmplastik","bmkeju","bjserealcoklat","bjserealkeju","bjturbo"};
             String query = "select * from user where id_user = " + id;
             return getdataid(query, kolom);
 

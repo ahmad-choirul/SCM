@@ -42,6 +42,8 @@ public class map extends masterview {
     boolean waktusawah1 = false;
     boolean waktusawah2 = false;
     String tanam = "";
+    String[] tanamsawah = {"", ""};
+    double hargabeli = 0;
 
     public map(String id) {
         initComponents();
@@ -90,46 +92,34 @@ public class map extends masterview {
                 detik++;
                 System.out.println("cek " + detik);
                 if (waktusawah1) {
-                    System.out.println("masuk sawah 1");
                     if (tanam.equalsIgnoreCase("jagung")) {
                         System.out.println("tanam jagung sawah 1");
                         sawah1 = detik + 100;
+                        seticonpng("jagung1", txtsawah1);
                     }
                     if (tanam.equalsIgnoreCase("gandum")) {
                         System.out.println("tanam gandum sawah 1");
-                        sawah1 = detik + 60;
+                        sawah1 = detik + 10;
                         seticonpng("gandum1", txtsawah1);
                     }
                     tanam = "";
                     waktusawah1 = false;
                 }
                 if (waktusawah2) {
-                    System.out.println("masuk sawah 1");
                     if (tanam.equalsIgnoreCase("jagung")) {
                         System.out.println("tanam jagung sawah 2");
                         sawah2 = detik + 100;
+                        seticonpng("jagung1", txtsawah2);
                     }
                     if (tanam.equalsIgnoreCase("gandum")) {
                         System.out.println("tanam gandum sawah 2");
-                        sawah2 = detik + 60;
+                        sawah2 = detik + 10;
                         seticonpng("gandum1", txtsawah2);
                     }
                     tanam = "";
-                    waktusawah1 = true;
-
+                    waktusawah2 = false;
                 }
-                if (sawah1 - 40 == detik) {
-                    seticonpng("gandum2", txtsawah1);
-                }
-                if (sawah2 - 40 == detik) {
-                    seticonpng("gandum2", txtsawah2);
-                }
-                if (sawah1 - 20 == detik) {
-                    seticonpng("gandum3", txtsawah1);
-                }
-                if (sawah2 - 20 == detik) {
-                    seticonpng("gandum3", txtsawah2);
-                }
+                setstatsawah();
                 if (sawah1 == detik) {
                     sawah1 = -1;
                 }
@@ -177,6 +167,41 @@ public class map extends masterview {
         }
     };
 
+    public void setstatsawah() {
+        if (tanamsawah[0].equalsIgnoreCase("jagung")) {
+            if (sawah1 - 50 == detik) {
+                seticonpng("jagung2", txtsawah1);
+            }
+            if (sawah1 - 5 == detik) {
+                seticonpng("jagung3", txtsawah1);
+            }
+        }
+        if (tanamsawah[0].equalsIgnoreCase("gandum")) {
+            if (sawah1 - 30 == detik) {
+                seticonpng("gandum2", txtsawah1);
+            }
+            if (sawah1 - 5 == detik) {
+                seticonpng("gandum3", txtsawah1);
+            }
+        }
+        if (tanamsawah[1].equalsIgnoreCase("jagung")) {
+            if (sawah2 - 50 == detik) {
+                seticonpng("jagung2", txtsawah2);
+            }
+            if (sawah2 - 5 == detik) {
+                seticonpng("jagung3", txtsawah2);
+            }
+        }
+        if (tanamsawah[0].equalsIgnoreCase("gandum")) {
+            if (sawah2 - 30 == detik) {
+                seticonpng("gandum2", txtsawah2);
+            }
+            if (sawah2 - 5 == detik) {
+                seticonpng("gandum3", txtsawah2);
+            }
+        }
+    }
+
     public void tambahproduksi(String idproduksi) {
         if (idproduksi.equalsIgnoreCase("1")) {
             //proses turbo
@@ -202,11 +227,12 @@ public class map extends masterview {
             locx = locx - kecepatan;
             panelgerak.setLocation(locx, 670);
         }
-        if (panelgerak.getX() == 1200) {
+        if (panelgerak.getX() > 1200) {
             seticonpng("mobil2", labelmobil);
             kanan = false;
         }
         if (panelgerak.getX() < 700) {
+            message("Pesanan berhasil");
             seticonpng("mobil", labelmobil);
             belibarangdarikota();
             setgudangppic();
@@ -249,7 +275,6 @@ public class map extends masterview {
         txtbelijagung.setText("0");
         txtbelikeju.setText("0");
         txtbeliplastik.setText("0");
-        txtbelisereal.setText("0");
         txtbelisusu.setText("0");
         try {
             String data[] = modelbarang.cekbarang(id);
@@ -257,18 +282,16 @@ public class map extends masterview {
             txtbbgandum.setText(data[6]);
             txtbbsusu.setText(data[7]);
             txtbbgula.setText(data[8]);
-            txtbmsereal.setText(data[9]);
-            txtbmcoklat.setText(data[10]);
-            txtbmplastik.setText(data[11]);
-            txtbmkeju.setText(data[12]);
+            txtbmcoklat.setText(data[9]);
+            txtbmplastik.setText(data[10]);
+            txtbmkeju.setText(data[11]);
             txtbbjagung1.setText(data[5]);
             txtbbgandum1.setText(data[6]);
             txtbbsusu1.setText(data[7]);
             txtbbgula1.setText(data[8]);
-            txtbmsereal1.setText(data[9]);
-            txtbmcoklat1.setText(data[10]);
-            txtbmplastik1.setText(data[11]);
-            txtbmkeju1.setText(data[12]);
+            txtbmcoklat1.setText(data[9]);
+            txtbmplastik1.setText(data[10]);
+            txtbmkeju1.setText(data[11]);
             txtuang.setText(data[4]);
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
@@ -329,7 +352,6 @@ public class map extends masterview {
         btnbeligandum = new javax.swing.JButton();
         btnbelisusu = new javax.swing.JButton();
         btnbeligula = new javax.swing.JButton();
-        btnbelisereal = new javax.swing.JButton();
         btnbelicoklat = new javax.swing.JButton();
         btnbelikeju = new javax.swing.JButton();
         btnbeliplastik = new javax.swing.JButton();
@@ -337,7 +359,6 @@ public class map extends masterview {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -346,16 +367,22 @@ public class map extends masterview {
         txtbeligandum = new javax.swing.JLabel();
         txtbelisusu = new javax.swing.JLabel();
         txtbeligula = new javax.swing.JLabel();
-        txtbelisereal = new javax.swing.JLabel();
         txtbelicoklat = new javax.swing.JLabel();
         txtbelikeju = new javax.swing.JLabel();
         jButton27 = new javax.swing.JButton();
+        btnbelijagung1 = new javax.swing.JButton();
+        btnbeligandum1 = new javax.swing.JButton();
+        btnbelisusu1 = new javax.swing.JButton();
+        btnbeligula1 = new javax.swing.JButton();
+        btnbelicoklat1 = new javax.swing.JButton();
+        btnbelikeju1 = new javax.swing.JButton();
+        btnbeliplastik1 = new javax.swing.JButton();
+        txthargatotal = new javax.swing.JLabel();
         btnmap3 = new javax.swing.JButton();
         panelbahan = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -364,7 +391,6 @@ public class map extends masterview {
         txtbbgandum = new javax.swing.JLabel();
         txtbbsusu = new javax.swing.JLabel();
         txtbbgula = new javax.swing.JLabel();
-        txtbmsereal = new javax.swing.JLabel();
         txtbmcoklat = new javax.swing.JLabel();
         txtbmkeju = new javax.swing.JLabel();
         txtbmplastik = new javax.swing.JLabel();
@@ -409,7 +435,6 @@ public class map extends masterview {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -418,7 +443,6 @@ public class map extends masterview {
         txtbbgandum1 = new javax.swing.JLabel();
         txtbbsusu1 = new javax.swing.JLabel();
         txtbbgula1 = new javax.swing.JLabel();
-        txtbmsereal1 = new javax.swing.JLabel();
         txtbmcoklat1 = new javax.swing.JLabel();
         txtbmkeju1 = new javax.swing.JLabel();
         txtbmplastik1 = new javax.swing.JLabel();
@@ -724,69 +748,61 @@ public class map extends masterview {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnbelijagung.setText("beli");
+        btnbelijagung.setText("+");
         btnbelijagung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbelijagungActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbelijagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 60, -1));
+        jPanel1.add(btnbelijagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 60, -1));
 
-        btnbeligandum.setText("beli");
+        btnbeligandum.setText("+");
         btnbeligandum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbeligandumActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbeligandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 60, -1));
+        jPanel1.add(btnbeligandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, 60, -1));
 
-        btnbelisusu.setText("beli");
+        btnbelisusu.setText("+");
         btnbelisusu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbelisusuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbelisusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 60, -1));
+        jPanel1.add(btnbelisusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 180, 60, -1));
 
-        btnbeligula.setText("beli");
+        btnbeligula.setText("+");
         btnbeligula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbeligulaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbeligula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 180, 60, -1));
+        jPanel1.add(btnbeligula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 170, 60, -1));
 
-        btnbelisereal.setText("beli");
-        btnbelisereal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbeliserealActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnbelisereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
-
-        btnbelicoklat.setText("beli");
+        btnbelicoklat.setText("+");
         btnbelicoklat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbelicoklatActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbelicoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, -1, -1));
+        jPanel1.add(btnbelicoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, -1, -1));
 
-        btnbelikeju.setText("beli");
+        btnbelikeju.setText("+");
         btnbelikeju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbelikejuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbelikeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, -1, -1));
+        jPanel1.add(btnbelikeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, -1, -1));
 
-        btnbeliplastik.setText("beli");
+        btnbeliplastik.setText("+");
         btnbeliplastik.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbeliplastikActionPerformed(evt);
             }
         });
-        jPanel1.add(btnbeliplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 320, -1, -1));
+        jPanel1.add(btnbeliplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 320, -1, -1));
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bb_jagung.png"))); // NOI18N
@@ -804,10 +820,6 @@ public class map extends masterview {
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_gula.png"))); // NOI18N
         jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 90, 90, 60));
 
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
-        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 90, 60));
-
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_coklat.png"))); // NOI18N
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 90, 60));
@@ -824,49 +836,43 @@ public class map extends masterview {
         txtbeliplastik.setForeground(new java.awt.Color(255, 255, 255));
         txtbeliplastik.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbeliplastik.setText("0");
-        jPanel1.add(txtbeliplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 290, 60, 30));
+        jPanel1.add(txtbeliplastik, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 310, 60, 30));
 
         txtbelijagung.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtbelijagung.setForeground(new java.awt.Color(255, 255, 255));
         txtbelijagung.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbelijagung.setText("0");
-        jPanel1.add(txtbelijagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 60, 30));
+        jPanel1.add(txtbelijagung, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 60, 30));
 
         txtbeligandum.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtbeligandum.setForeground(new java.awt.Color(255, 255, 255));
         txtbeligandum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbeligandum.setText("0");
-        jPanel1.add(txtbeligandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 60, 30));
+        jPanel1.add(txtbeligandum, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 60, 30));
 
         txtbelisusu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtbelisusu.setForeground(new java.awt.Color(255, 255, 255));
         txtbelisusu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbelisusu.setText("0");
-        jPanel1.add(txtbelisusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, 60, 30));
+        jPanel1.add(txtbelisusu, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, 60, 30));
 
         txtbeligula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtbeligula.setForeground(new java.awt.Color(255, 255, 255));
         txtbeligula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbeligula.setText("0");
-        jPanel1.add(txtbeligula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 150, 60, 30));
-
-        txtbelisereal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtbelisereal.setForeground(new java.awt.Color(255, 255, 255));
-        txtbelisereal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtbelisereal.setText("0");
-        jPanel1.add(txtbelisereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 60, 30));
+        jPanel1.add(txtbeligula, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 170, 60, 30));
 
         txtbelicoklat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtbelicoklat.setForeground(new java.awt.Color(255, 255, 255));
         txtbelicoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbelicoklat.setText("0");
-        jPanel1.add(txtbelicoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 60, 30));
+        jPanel1.add(txtbelicoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 60, 30));
 
         txtbelikeju.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtbelikeju.setForeground(new java.awt.Color(255, 255, 255));
         txtbelikeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbelikeju.setText("0");
-        jPanel1.add(txtbelikeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, 60, 30));
+        jPanel1.add(txtbelikeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 60, 30));
 
         jButton27.setText("pesan");
         jButton27.addActionListener(new java.awt.event.ActionListener() {
@@ -874,7 +880,68 @@ public class map extends masterview {
                 jButton27ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 350, 80, 80));
+        jPanel1.add(jButton27, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 350, 80, 80));
+
+        btnbelijagung1.setText("-");
+        btnbelijagung1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbelijagung1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnbelijagung1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 60, -1));
+
+        btnbeligandum1.setText("-");
+        btnbeligandum1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbeligandum1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnbeligandum1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 60, -1));
+
+        btnbelisusu1.setText("-");
+        btnbelisusu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbelisusu1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnbelisusu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 60, -1));
+
+        btnbeligula1.setText("-");
+        btnbeligula1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbeligula1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnbeligula1, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 170, 60, -1));
+
+        btnbelicoklat1.setText("-");
+        btnbelicoklat1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbelicoklat1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnbelicoklat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
+
+        btnbelikeju1.setText("-");
+        btnbelikeju1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbelikeju1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnbelikeju1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 320, -1, -1));
+
+        btnbeliplastik1.setText("-");
+        btnbeliplastik1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbeliplastik1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnbeliplastik1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 320, -1, -1));
+
+        txthargatotal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txthargatotal.setForeground(new java.awt.Color(255, 255, 255));
+        txthargatotal.setText("harga");
+        jPanel1.add(txthargatotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 370, 180, 50));
 
         panelgudangppic.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 1260, 440));
 
@@ -890,6 +957,7 @@ public class map extends masterview {
         });
         panelgudangppic.add(btnmap3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 0, 130, 110));
 
+        panelbahan.setOpaque(false);
         panelbahan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -903,10 +971,6 @@ public class map extends masterview {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_coklat.png"))); // NOI18N
         panelbahan.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 90, 60));
-
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
-        panelbahan.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 90, 60));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_gula.png"))); // NOI18N
@@ -935,9 +999,6 @@ public class map extends masterview {
 
         txtbbgula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelbahan.add(txtbbgula, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 70, 30));
-
-        txtbmsereal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelbahan.add(txtbmsereal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 70, 30));
 
         txtbmcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelbahan.add(txtbmcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 70, 30));
@@ -1259,16 +1320,6 @@ public class map extends masterview {
         gridBagConstraints.insets = new java.awt.Insets(10, 30, 0, 0);
         panelbahan1.add(jLabel14, gridBagConstraints);
 
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_sereal.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
-        panelbahan1.add(jLabel15, gridBagConstraints);
-
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bm_gula.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1357,17 +1408,6 @@ public class map extends masterview {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 20, 35, 0);
         panelbahan1.add(txtbbgula1, gridBagConstraints);
-
-        txtbmsereal1.setForeground(new java.awt.Color(255, 255, 255));
-        txtbmsereal1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 70;
-        gridBagConstraints.ipady = 30;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 30, 35, 0);
-        panelbahan1.add(txtbmsereal1, gridBagConstraints);
 
         txtbmcoklat1.setForeground(new java.awt.Color(255, 255, 255));
         txtbmcoklat1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1587,11 +1627,10 @@ public class map extends masterview {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void btnbelijagungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelijagungActionPerformed
-        //namakolom,jumlah barang tiap beli,harga sekali beli,id user
-//        modelbarang.belibarang("bbjagung", "1", "10", id);
-//        setgudangppic();
-        int get = Integer.parseInt(txtbelijagung.getText()) + 1;
+        int get = Integer.parseInt(txtbelijagung.getText()) + 10;
         txtbelijagung.setText(get + "");
+        hargabeli += 100;
+        setbeli();
     }//GEN-LAST:event_btnbelijagungActionPerformed
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
@@ -1659,59 +1698,45 @@ public class map extends masterview {
     }//GEN-LAST:event_tmbproduksicoklatActionPerformed
 
     private void btnbeligandumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbeligandumActionPerformed
-//namakolom,jumlah barang tiap beli,harga sekali beli,id user
-//        
-//        setgudangppic();
-        int get = Integer.parseInt(txtbeligandum.getText()) + 1;
+        int get = Integer.parseInt(txtbeligandum.getText()) + 10;
         txtbeligandum.setText(get + "");
+        hargabeli += 125;
+        setbeli();
     }//GEN-LAST:event_btnbeligandumActionPerformed
 
     private void btnbelisusuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelisusuActionPerformed
-//namakolom,jumlah barang tiap beli,harga sekali beli,id user
-//        
-//        setgudangppic();
-        int get = Integer.parseInt(txtbelisusu.getText()) + 1;
+        int get = Integer.parseInt(txtbelisusu.getText()) + 5;
         txtbelisusu.setText(get + "");
+        hargabeli += 75;
+        setbeli();
     }//GEN-LAST:event_btnbelisusuActionPerformed
 
     private void btnbeligulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbeligulaActionPerformed
-//namakolom,jumlah barang tiap beli,harga sekali beli,id user
-//        
-//        setgudangppic();
-        int get = Integer.parseInt(txtbeligula.getText()) + 1;
+        int get = Integer.parseInt(txtbeligula.getText()) + 5;
         txtbeligula.setText(get + "");
+        hargabeli += 50;
+        setbeli();
     }//GEN-LAST:event_btnbeligulaActionPerformed
 
-    private void btnbeliserealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbeliserealActionPerformed
-//namakolom,jumlah barang tiap beli,harga sekali beli,id user
-//        
-//        setgudangppic();
-        int get = Integer.parseInt(txtbelisereal.getText()) + 1;
-        txtbelisereal.setText(get + "");
-    }//GEN-LAST:event_btnbeliserealActionPerformed
-
     private void btnbelicoklatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelicoklatActionPerformed
-//namakolom,jumlah barang tiap beli,harga sekali beli,id user
-//        
-//        setgudangppic();
-        int get = Integer.parseInt(txtbelicoklat.getText()) + 1;
+        int get = Integer.parseInt(txtbelicoklat.getText()) + 5;
         txtbelicoklat.setText(get + "");
+        hargabeli += 60;
+        setbeli();
     }//GEN-LAST:event_btnbelicoklatActionPerformed
 
     private void btnbelikejuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelikejuActionPerformed
-//namakolom,jumlah barang tiap beli,harga sekali beli,id user
-//        
-//        setgudangppic();
-        int get = Integer.parseInt(txtbelikeju.getText()) + 1;
+        int get = Integer.parseInt(txtbelikeju.getText()) + 5;
         txtbelikeju.setText(get + "");
+        hargabeli += 85;
+        setbeli();
     }//GEN-LAST:event_btnbelikejuActionPerformed
 
     private void btnbeliplastikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbeliplastikActionPerformed
-
-//        
-//        
-        int get = Integer.parseInt(txtbeliplastik.getText()) + 1;
+        int get = Integer.parseInt(txtbeliplastik.getText()) + 500;
         txtbeliplastik.setText(get + "");
+        hargabeli += 90;
+        setbeli();
     }//GEN-LAST:event_btnbeliplastikActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
@@ -1723,7 +1748,7 @@ public class map extends masterview {
     private void btnsawahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsawahActionPerformed
         setsawah();
         popuppiltanaman.setVisible(false);
-        
+
     }//GEN-LAST:event_btnsawahActionPerformed
 
     private void txtsawah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsawah1ActionPerformed
@@ -1741,18 +1766,19 @@ public class map extends masterview {
     }//GEN-LAST:event_upgrademobilActionPerformed
 
     private void gandumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gandumActionPerformed
-
         tanam = "gandum";
-        if (sawah1 == 0) {
+        if (sawah1 == 0 && tanamsawah[0].equalsIgnoreCase("")) {
+            if (modelbarang.jualbarang("bbgandum", "30", id)) {
+                System.out.println("berhasil tanam gandum dan kurang");
+                tanamsawah[0] = tanam;
+            }
             waktusawah1 = true;
+        } else if (sawah2 == 0 && tanamsawah[1].equalsIgnoreCase("")) {
             if (modelbarang.jualbarang("bbgandum", "30", id)) {
-                System.out.println("berhasil tanam dan kurang");
+                System.out.println("berhasil tanam gandum dan kurang");
+                tanamsawah[1] = tanam;
             }
-        } else if (sawah2 == 0) {
             waktusawah2 = true;
-            if (modelbarang.jualbarang("bbgandum", "30", id)) {
-                System.out.println("berhasil tanam dan kurang");
-            }
         } else {
             message("sawah penuh");
         }
@@ -1765,21 +1791,24 @@ public class map extends masterview {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jagungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jagungActionPerformed
-        tanam = "gandum";
-        if (sawah1 == 0) {
+        tanam = "jagung";
+        if (sawah1 == 0 && tanamsawah[0].equalsIgnoreCase("")) {
             if (modelbarang.jualbarang("bbjagung", "45", id)) {
-                System.out.println("berhasil tanam dan kurang");
+                System.out.println("berhasil tanam jagung dan kurang");
+                tanamsawah[0] = tanam;
+
             }
             waktusawah1 = true;
-        } else if (sawah2 == 0) {
+        } else if (sawah2 == 0 && tanamsawah[1].equalsIgnoreCase("")) {
             if (modelbarang.jualbarang("bbjagung", "45", id)) {
-                System.out.println("berhasil tanam dan kurang");
+                System.out.println("berhasil tanam jagung dan kurang");
+                tanamsawah[1] = tanam;
             }
             waktusawah2 = true;
         } else {
             message("sawah penuh");
         }
-
+        setsawah();
         popuppiltanaman.setVisible(false);
     }//GEN-LAST:event_jagungActionPerformed
 
@@ -1787,18 +1816,38 @@ public class map extends masterview {
 
         if (sawah2 == -1) {
             sawah2 = 0;
+            if (tanamsawah[1].equalsIgnoreCase("jagung")) {
+
+                modelbarang.tambahproduksi("bbjagung", "90", id);
+            } else if (tanamsawah[1].equalsIgnoreCase("gandum")) {
+                modelbarang.tambahproduksi("bbgandum", "60", id);
+
+            }
+            tanamsawah[1] = "";
+            seticonpng("sawah0", txtsawah2);
+            setsawah();
         } else {
             message("sawah belum siap panen");
         }
-
+        popuppanentanaman.setVisible(false);
     }//GEN-LAST:event_btnsawah2ActionPerformed
 
     private void btnsawah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsawah1ActionPerformed
         if (sawah1 == -1) {
             sawah1 = 0;
+            if (tanamsawah[0].equalsIgnoreCase("jagung")) {
+                modelbarang.tambahproduksi("bbjagung", "90", id);
+                message("");
+            } else if (tanamsawah[0].equalsIgnoreCase("gandum")) {
+                modelbarang.tambahproduksi("bbgandum", "60", id);
+            }
+            tanamsawah[0] = "";
+            seticonpng("sawah0", txtsawah1);
+            setsawah();
         } else {
             message("sawah belum siap panen");
         }
+        popuppanentanaman.setVisible(false);
     }//GEN-LAST:event_btnsawah1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1817,8 +1866,82 @@ public class map extends masterview {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void popuppanentanamanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_popuppanentanamanMouseClicked
-popuppanentanaman.setVisible(false);
+        popuppanentanaman.setVisible(false);
     }//GEN-LAST:event_popuppanentanamanMouseClicked
+
+    private void btnbelijagung1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelijagung1ActionPerformed
+        int get = Integer.parseInt(txtbelijagung.getText()) - 10;
+
+        if (get >= 0) {
+            txtbelijagung.setText(get + "");
+            hargabeli -= 100;
+        }
+        setbeli();
+    }//GEN-LAST:event_btnbelijagung1ActionPerformed
+
+    private void btnbeligandum1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbeligandum1ActionPerformed
+        int get = Integer.parseInt(txtbeligandum.getText()) - 10;
+
+        if (get >= 0) {
+            txtbeligandum.setText(get + "");
+            hargabeli -= 125;
+        }
+        setbeli();
+    }//GEN-LAST:event_btnbeligandum1ActionPerformed
+
+    private void btnbelisusu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelisusu1ActionPerformed
+        int get = Integer.parseInt(txtbelisusu.getText()) - 5;
+        if (get >= 0) {
+            txtbelisusu.setText(get + "");
+            hargabeli -= 75;
+        }
+        setbeli();
+    }//GEN-LAST:event_btnbelisusu1ActionPerformed
+
+    private void btnbeligula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbeligula1ActionPerformed
+        int get = Integer.parseInt(txtbeligula.getText()) - 5;
+        if (get >= 0) {
+            txtbeligula.setText(get + "");
+            hargabeli -= 50;
+        }
+        setbeli();
+    }//GEN-LAST:event_btnbeligula1ActionPerformed
+
+    private void btnbelicoklat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelicoklat1ActionPerformed
+        int get = Integer.parseInt(txtbelicoklat.getText()) - 5;
+        if (get >= 0) {
+            txtbelicoklat.setText(get + "");
+            hargabeli -= 60;
+        }
+        setbeli();
+    }//GEN-LAST:event_btnbelicoklat1ActionPerformed
+
+    private void btnbelikeju1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelikeju1ActionPerformed
+        int get = Integer.parseInt(txtbelikeju.getText()) - 5;
+        if (get >= 0) {
+            txtbelikeju.setText(get + "");
+            hargabeli -= 85;
+        }
+        setbeli();
+    }//GEN-LAST:event_btnbelikeju1ActionPerformed
+
+    private void btnbeliplastik1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbeliplastik1ActionPerformed
+        int get = Integer.parseInt(txtbeliplastik.getText()) - 500;
+
+        if (get >= 0) {
+            txtbeliplastik.setText(get + "");
+            hargabeli -= 90;
+        }
+        setbeli();
+    }//GEN-LAST:event_btnbeliplastik1ActionPerformed
+    public void setbeli() {
+        if (hargabeli > Double.parseDouble(txtuang.getText())) {
+            message("Uang tidak mencukupi");
+        } else {
+            txthargatotal.setText(hargabeli + "");
+        }
+    }
+
     public void setenabelbtnbeli(boolean bool) {
         btnbelicoklat.setEnabled(bool);
         btnbeligandum.setEnabled(bool);
@@ -1826,21 +1949,28 @@ popuppanentanaman.setVisible(false);
         btnbelijagung.setEnabled(bool);
         btnbelikeju.setEnabled(bool);
         btnbeliplastik.setEnabled(bool);
-        btnbelisereal.setEnabled(bool);
         btnbelisusu.setEnabled(bool);
+        upgrademobil.setEnabled(bool);
+        btnbelicoklat1.setEnabled(bool);
+        btnbeligandum1.setEnabled(bool);
+        btnbeligula1.setEnabled(bool);
+        btnbelijagung1.setEnabled(bool);
+        btnbelikeju1.setEnabled(bool);
+        btnbeliplastik1.setEnabled(bool);
+        btnbelisusu1.setEnabled(bool);
         upgrademobil.setEnabled(bool);
     }
 
     public void belibarangdarikota() {
         System.out.println("beli barang");
-        modelbarang.belibarang("bbjagung", txtbelijagung.getText(), "10", id);
-        modelbarang.belibarang("bbgandum", txtbeligandum.getText(), "10", id);
-        modelbarang.belibarang("bbsusu", txtbelisusu.getText(), "10", id);
-        modelbarang.belibarang("bbgula", txtbeligula.getText(), "10", id);
-        modelbarang.belibarang("bmsereal", txtbelisereal.getText(), "10", id);
-        modelbarang.belibarang("bmcoklat", txtbelicoklat.getText(), "10", id);
-        modelbarang.belibarang("bmkeju", txtbelikeju.getText(), "10", id);
-        modelbarang.belibarang("bmplastik", txtbeliplastik.getText(), "10", id);
+        modelbarang.belibarang("bbjagung", txtbelijagung.getText(), "0", id);
+        modelbarang.belibarang("bbgandum", txtbeligandum.getText(), "0", id);
+        modelbarang.belibarang("bbsusu", txtbelisusu.getText(), "0", id);
+        modelbarang.belibarang("bbgula", txtbeligula.getText(), "0", id);
+        modelbarang.belibarang("bmcoklat", txtbelicoklat.getText(), "0", id);
+        modelbarang.belibarang("bmkeju", txtbelikeju.getText(), "0", id);
+        modelbarang.belibarang("bmplastik", txtbeliplastik.getText(), "0", id);
+        modelbarang.belibarang("bmplastik", "0", hargabeli + "", id);
     }
 
     public void cekproduksi() {
@@ -1929,13 +2059,19 @@ popuppanentanaman.setVisible(false);
     private javax.swing.JLabel background4;
     private javax.swing.JLabel background5;
     private javax.swing.JButton btnbelicoklat;
+    private javax.swing.JButton btnbelicoklat1;
     private javax.swing.JButton btnbeligandum;
+    private javax.swing.JButton btnbeligandum1;
     private javax.swing.JButton btnbeligula;
+    private javax.swing.JButton btnbeligula1;
     private javax.swing.JButton btnbelijagung;
+    private javax.swing.JButton btnbelijagung1;
     private javax.swing.JButton btnbelikeju;
+    private javax.swing.JButton btnbelikeju1;
     private javax.swing.JButton btnbeliplastik;
-    private javax.swing.JButton btnbelisereal;
+    private javax.swing.JButton btnbeliplastik1;
     private javax.swing.JButton btnbelisusu;
+    private javax.swing.JButton btnbelisusu1;
     private javax.swing.JButton btnexit;
     private javax.swing.JButton btngudangfinsih;
     private javax.swing.JButton btngudangppic;
@@ -1965,11 +2101,9 @@ popuppanentanaman.setVisible(false);
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1982,7 +2116,6 @@ popuppanentanaman.setVisible(false);
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -2045,7 +2178,6 @@ popuppanentanaman.setVisible(false);
     private javax.swing.JLabel txtbelijagung;
     private javax.swing.JLabel txtbelikeju;
     private javax.swing.JLabel txtbeliplastik;
-    private javax.swing.JLabel txtbelisereal;
     private javax.swing.JLabel txtbelisusu;
     private javax.swing.JLabel txtbibitgandum;
     private javax.swing.JLabel txtbibitjagung;
@@ -2055,8 +2187,7 @@ popuppanentanaman.setVisible(false);
     private javax.swing.JLabel txtbmkeju1;
     private javax.swing.JLabel txtbmplastik;
     private javax.swing.JLabel txtbmplastik1;
-    private javax.swing.JLabel txtbmsereal;
-    private javax.swing.JLabel txtbmsereal1;
+    private javax.swing.JLabel txthargatotal;
     private javax.swing.JButton txtsawah1;
     private javax.swing.JButton txtsawah2;
     private javax.swing.JLabel txtserealcoklat;
@@ -2076,7 +2207,7 @@ popuppanentanaman.setVisible(false);
     private void setsawah() {
         try {
             String[] a = new String[2];
-            a=modelbarang.cekbibit(id);
+            a = modelbarang.cekbibit(id);
             txtbibitgandum.setText(a[1]);
             txtbibitjagung.setText(a[0]);
         } catch (SQLException ex) {
