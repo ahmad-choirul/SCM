@@ -25,7 +25,7 @@ public class masterview extends javax.swing.JFrame {
     boolean loop[] = {false, false, false, false};
     boolean change[] = {false, false, false, false};
     int getdetik[] = {0, 0, 0, 0};
-    int setdetikloop[] = {10, 10, 10, 10};
+    int setdetikloop[] = {120, 120, 120, 120};
     //getdetik 0= mesinjadi1
     //getdetik 1= mesinjadi2
     //getdetik 2= mesin1
