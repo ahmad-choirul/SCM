@@ -42,6 +42,7 @@ public class mainmenu extends masterview {
 
         btnexit = new javax.swing.JButton();
         btnplay = new javax.swing.JButton();
+        btncontinue = new javax.swing.JToggleButton();
         btnhelp = new javax.swing.JButton();
         btnscore = new javax.swing.JButton();
         background = new javax.swing.JLabel();
@@ -73,7 +74,20 @@ public class mainmenu extends masterview {
                 btnplayActionPerformed(evt);
             }
         });
-        getContentPane().add(btnplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 420, 110));
+        getContentPane().add(btnplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 420, 110));
+
+        btncontinue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/btn_continue.png"))); // NOI18N
+        btncontinue.setBorder(null);
+        btncontinue.setBorderPainted(false);
+        btncontinue.setContentAreaFilled(false);
+        btncontinue.setFocusPainted(false);
+        btncontinue.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/btn_continue2.png"))); // NOI18N
+        btncontinue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncontinueActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btncontinue, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
 
         btnhelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/btn_help.png"))); // NOI18N
         btnhelp.setBorderPainted(false);
@@ -86,7 +100,7 @@ public class mainmenu extends masterview {
                 btnhelpActionPerformed(evt);
             }
         });
-        getContentPane().add(btnhelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 400, 100));
+        getContentPane().add(btnhelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 400, 100));
 
         btnscore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/btn_hs.png"))); // NOI18N
         btnscore.setBorderPainted(false);
@@ -99,7 +113,7 @@ public class mainmenu extends masterview {
                 btnscoreActionPerformed(evt);
             }
         });
-        getContentPane().add(btnscore, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 510, 610, 130));
+        getContentPane().add(btnscore, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 580, 610, 130));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgmainmenu.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 760));
@@ -131,6 +145,10 @@ public class mainmenu extends masterview {
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnexitActionPerformed
+
+    private void btncontinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncontinueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btncontinueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,6 +187,7 @@ public class mainmenu extends masterview {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JToggleButton btncontinue;
     private javax.swing.JButton btnexit;
     private javax.swing.JButton btnhelp;
     private javax.swing.JButton btnplay;
