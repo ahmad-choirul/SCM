@@ -128,7 +128,6 @@ public class mainmenu extends masterview {
             System.out.println("nama = "+nama);
             modeluser.tambahuser(nama);
             setwindows(new map(modeluser.getiduser(nama)));
-//            System.out.println("id user ="+modeluser.getiduser("abcd"));
         } catch (SQLException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
         }

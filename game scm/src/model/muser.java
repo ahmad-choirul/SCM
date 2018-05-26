@@ -68,6 +68,12 @@ public String[] getupdatebarang(String id) throws SQLException {
         String id = getdataidNoaray(query);
         return id;
     }
+    public String getbulanke(String id) throws SQLException {
+
+        String query = "SELECT `id_user` from user WHERE `id_user` = '"+nama+"'";
+        String id = getdataidNoaray(query);
+        return id;
+    }
     public boolean hapusbarang(String data) {
         String query = "delete from barang where kd_barang = " + data;
         return execute(query);
