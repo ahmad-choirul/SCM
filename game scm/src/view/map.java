@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.mbarang;
 import model.muser;
 
@@ -45,13 +47,12 @@ public class map extends masterview {
     String[] tanamsawah = {"", ""};
     double hargabeli = 0;
     int bulanke = 0;
-    double[] permintaan = {0, 0, 0};
-    double[] penjualan = {0, 0, 0};
-    double[] ambilbulan={0,0,0,0,0,0};
+    double[] peramalan = {0, 0, 0};//untuk menamoung hasil peramalan
+    double[] penjualan = {0, 0, 0};//untuk menampung jumlah pengiriman
+    double[] ambilbulan = {0, 0, 0, 0, 0, 0};//untuk ambil 6 bulan sebelumnya
 
     public map(String id) {
         initComponents();
-        bulanke
         panelgerak.setLocation(locx, 640);
         this.setVisible(true);
         start();
@@ -61,8 +62,9 @@ public class map extends masterview {
         try {
             modeluser = new muser();
             modelbarang = new mbarang();
-//            setupgradebarang();
-
+            bulanke = modeluser.getbulanke(id);
+            setupgradebarang();
+            setpermintaan();
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,6 +98,7 @@ public class map extends masterview {
                 System.out.println("cek " + detik);
                 if (detik % 300 == 0) {
                     bulanke++;
+                    setpermintaan();
                 }
                 if (waktusawah1) {
                     if (tanam.equalsIgnoreCase("jagung")) {
@@ -175,16 +178,35 @@ public class map extends masterview {
 
     public void setpermintaan() {
         if (bulanke >= 6) {
-            //1turbo
-            //2keju
-            //3coklat
-txtpenjualanturbo.setText(penjualan[0]+"");
-txtpenjualankeju.setText(penjualan[1]+"");
-txtpenjualancoklat.setText(penjualan[2]+"");
+            try {
+                //1turbo
+                //2keju
+                //3coklat
+                peramalan[0] = doubleexp(modeluser.getpenjualan(id, 8));
+                peramalan[1] = doubleexp(modeluser.getpenjualan(id, 9));
+                peramalan[2] = doubleexp(modeluser.getpenjualan(id, 10));
+                txtpenjualanturbo.setText(doubleexp(modeluser.getpenjualan(id, 8))+"");
+                txtpenjualankeju.setText(doubleexp(modeluser.getpenjualan(id, 9))+"");
+                txtpenjualancoklat.setText(doubleexp(modeluser.getpenjualan(id, 10))+"");
+            } catch (SQLException ex) {
+                Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
+    public int[] getarraypenjualan(DefaultTableModel a) {
+        int[] hasil = new int[6];
+            hasil[0] = Integer.parseInt(a.getValueAt(1, 1).toString());
+            hasil[1] = Integer.parseInt(a.getValueAt(2, 1).toString());
+            hasil[2] = Integer.parseInt(a.getValueAt(3, 1).toString());
+            hasil[3] = Integer.parseInt(a.getValueAt(4, 1).toString());
+            hasil[4] = Integer.parseInt(a.getValueAt(5, 1).toString());
+            hasil[5] = Integer.parseInt(a.getValueAt(6, 1).toString());
+        return hasil;
+    }
+
     public double doubleexp(int data[]) {
+        System.out.println("masuk ke peramalan");
         double alpha = 0.5;
         double s1t[] = new double[data.length];
         s1t[0] = data[0];
@@ -204,6 +226,7 @@ txtpenjualancoklat.setText(penjualan[2]+"");
             bt[i] = (alpha / (1 - alpha)) * (s1t[i] - s2t[i]);
         }
         double hasil = at[data.length - 1] + bt[data.length - 1];
+        System.out.println("hasil peramalan"+hasil);
         return hasil;
     }
 
@@ -294,12 +317,12 @@ txtpenjualancoklat.setText(penjualan[2]+"");
     public void setgudangfinish() {
         try {
             String data[] = modelbarang.cekbarang(id);
-            txtserealcoklat.setText(data[13]);
-            txtserealkeju.setText(data[14]);
-            txtturbo.setText(data[15]);
-            txtserealcoklat1.setText(data[13]);
-            txtserealkeju1.setText(data[14]);
-            txtturbo1.setText(data[15]);
+            txtserealcoklat.setText(data[12]);
+            txtserealkeju.setText(data[13]);
+            txtturbo.setText(data[14]);
+            txtserealcoklat1.setText(data[12]);
+            txtserealkeju1.setText(data[13]);
+            txtturbo1.setText(data[14]);
 
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
@@ -477,15 +500,13 @@ txtpenjualancoklat.setText(penjualan[2]+"");
         txtpenjualancoklat = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         txtpenjualankeju = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         txtpenjualanturbo = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         background1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1387,57 +1408,84 @@ txtpenjualancoklat.setText(penjualan[2]+"");
         txtturbo.setForeground(new java.awt.Color(255, 255, 255));
         txtturbo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtturbo.setText("aa");
-        panelgudangfinish.add(txtturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 590, 80, 30));
+        panelgudangfinish.add(txtturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 100, 80, 30));
 
         txtserealcoklat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtserealcoklat.setForeground(new java.awt.Color(255, 255, 255));
         txtserealcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtserealcoklat.setText("jLabel4");
-        panelgudangfinish.add(txtserealcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 120, 80, 30));
+        panelgudangfinish.add(txtserealcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 80, 30));
 
         txtserealkeju.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtserealkeju.setForeground(new java.awt.Color(255, 255, 255));
         txtserealkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtserealkeju.setText("aa");
-        panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 350, 80, 30));
+        panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 80, 30));
 
+        txtpenjualancoklat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtpenjualancoklat.setForeground(new java.awt.Color(255, 255, 255));
         txtpenjualancoklat.setText("jLabel1");
-        panelgudangfinish.add(txtpenjualancoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, -1, -1));
+        panelgudangfinish.add(txtpenjualancoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 410, 60, -1));
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
         jButton2.setText("-");
-        panelgudangfinish.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 410, -1, -1));
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
+        panelgudangfinish.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, -1, -1));
 
-        jButton4.setText("+");
-        panelgudangfinish.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.setFocusPainted(false);
+        jButton4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
+        panelgudangfinish.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjserealcoklat.png"))); // NOI18N
-        panelgudangfinish.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, -1, -1));
-
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
         jButton5.setText("-");
-        panelgudangfinish.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        jButton5.setFocusPainted(false);
+        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
+        panelgudangfinish.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, -1, -1));
 
+        txtpenjualankeju.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtpenjualankeju.setForeground(new java.awt.Color(255, 255, 255));
         txtpenjualankeju.setText("jLabel1");
-        panelgudangfinish.add(txtpenjualankeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 410, -1, -1));
+        panelgudangfinish.add(txtpenjualankeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 400, 70, -1));
 
-        jButton7.setText("+");
-        panelgudangfinish.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 410, -1, -1));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
+        jButton7.setBorderPainted(false);
+        jButton7.setContentAreaFilled(false);
+        jButton7.setFocusPainted(false);
+        jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
+        panelgudangfinish.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjserealkeju.png"))); // NOI18N
-        panelgudangfinish.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, -1, -1));
-
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
         jButton8.setText("-");
-        panelgudangfinish.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 400, -1, -1));
+        jButton8.setBorderPainted(false);
+        jButton8.setContentAreaFilled(false);
+        jButton8.setFocusPainted(false);
+        jButton8.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
+        panelgudangfinish.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 370, -1, -1));
 
+        txtpenjualanturbo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtpenjualanturbo.setForeground(new java.awt.Color(255, 255, 255));
         txtpenjualanturbo.setText("jLabel1");
-        panelgudangfinish.add(txtpenjualanturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 400, -1, -1));
+        panelgudangfinish.add(txtpenjualanturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 390, 70, -1));
 
-        jButton9.setText("+");
-        panelgudangfinish.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 400, -1, -1));
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
+        jButton9.setBorderPainted(false);
+        jButton9.setContentAreaFilled(false);
+        jButton9.setFocusPainted(false);
+        jButton9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
+        panelgudangfinish.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 370, -1, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjturbo.png"))); // NOI18N
-        panelgudangfinish.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 200, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/truk.png"))); // NOI18N
+        panelgudangfinish.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 600, 310, 140));
 
-        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgpenjualan.png"))); // NOI18N
+        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgdistributor.png"))); // NOI18N
         panelgudangfinish.add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         panelutama.add(panelgudangfinish, "card3");
@@ -2038,6 +2086,7 @@ txtpenjualancoklat.setText(penjualan[2]+"");
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -2046,7 +2095,6 @@ txtpenjualancoklat.setText(penjualan[2]+"");
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -2056,7 +2104,6 @@ txtpenjualancoklat.setText(penjualan[2]+"");
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -2064,7 +2111,6 @@ txtpenjualancoklat.setText(penjualan[2]+"");
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

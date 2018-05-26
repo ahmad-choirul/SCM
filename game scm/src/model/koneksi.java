@@ -13,6 +13,7 @@ public class koneksi {
     Connection con;
     Statement stm;
     java.sql.Connection connection;
+
     public koneksi() throws SQLException {
         String url = "jdbc:mysql://localhost/scmgame"; //url DB
         String username = "root"; //username DB
@@ -21,6 +22,7 @@ public class koneksi {
         this.con = (Connection) DriverManager.getConnection(url, username, pass);
         this.stm = (Statement) this.con.createStatement();
     }
+
     //method untuk ekesekusi query Insert, Update, dan Delete
     public void executeQuery(String query) throws SQLException {
         this.stm.execute(query);
@@ -40,7 +42,7 @@ public class koneksi {
             System.out.println("query berhasil");
         } catch (SQLException ex) {
             sukseseksekusi = false;
-            System.out.println("query salah");
+            System.out.println("query salah" + query);
         }
 
         return sukseseksekusi;
@@ -54,6 +56,18 @@ public class koneksi {
             }
         }
 
+        return data;
+    }
+
+    public String[] getarraykolom(String query) throws SQLException {
+        String[] data = new String[6];
+        ResultSet rs = getResult(query);
+        int count = 0;
+        while (rs.next()) {
+            data[count] = rs.getString("total_jual");
+            System.out.println("data"+data[count]);
+            count++;
+        }
         return data;
     }
 
