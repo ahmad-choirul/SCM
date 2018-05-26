@@ -45,6 +45,10 @@ public class mbarang extends koneksi {
         String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "-'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
         return execute(query2);
     }
+    public boolean upgradebarang(String barang, String jumlah, String id) {
+        String query2 = "UPDATE `user` SET `" + barang + "` = '" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
+        return execute(query2);
+    }
 
     public boolean tambahproduksi(String barang, String jumlah, String id) {
         String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "+'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";

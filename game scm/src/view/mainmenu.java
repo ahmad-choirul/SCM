@@ -143,7 +143,7 @@ public class mainmenu extends masterview {
     }//GEN-LAST:event_btnscoreActionPerformed
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
-        this.dispose();
+System.exit(0);
     }//GEN-LAST:event_btnexitActionPerformed
 
     private void btncontinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncontinueActionPerformed

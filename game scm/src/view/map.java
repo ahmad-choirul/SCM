@@ -31,7 +31,7 @@ public class map extends masterview {
     byte pillihidmesin;
     boolean gerakmobil = false;
     boolean kanan = true;
-    String produkproduksi[] = {null, null, null, null};
+    String produkproduksi[] = {null, null};
     int locx = 700;
     boolean cekjalanawal = false;
     boolean belibarang = false;
@@ -64,16 +64,15 @@ public class map extends masterview {
     }
 
     public void setpopupvisibelfalse() {
-        upgrademesin.setVisible(false);
         popupmesinjadi.setVisible(false);
         popuppanentanaman.setVisible(false);
     }
 
     public void setupgradebarang() throws SQLException {
         String data[] = modeluser.getupdatebarang(id);
-        for (int i = 0; i < 4; i++) {
-            setdetikloop[i] = Integer.parseInt(data[i + 1]);
-        }
+        setdetikloop[0] = Integer.parseInt(data[1]);
+        setdetikloop[1] = Integer.parseInt(data[2]);
+        kecepatan = Byte.parseByte(data[3]);
     }
 
     public void start() {
@@ -131,12 +130,12 @@ public class map extends masterview {
                 if (sawah2 > detik) {
                     txtwaktusawah2.setText(sawah2 - detik + "");
                 }
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 2; i++) {
                     if (loop[i]) {
                         System.out.println("ada yang true");
                         loop[i] = false;
                         getdetik[i] = detik + setdetikloop[i];
-                        System.out.println("get detik " + getdetik[0]);
+                        System.out.println("get detik " + getdetik[i]);
                     }
                     if (getdetik[i] == detik) {
                         seticonpngloop(i);
@@ -242,10 +241,10 @@ public class map extends masterview {
 
     public void seticonpngloop(int i) {
         System.out.println("seticonpngloop");
-        if (i == 2) {
+        if (i == 0) {
             seticonpng("mesinjadi", labelmesinjadi1);
         }
-        if (i == 3) {
+        if (i == 1) {
             seticonpng("mesinjadi", labelmesinjadi2);
         }
     }
@@ -301,13 +300,6 @@ public class map extends masterview {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        upgrademesin = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        updatemesin1 = new javax.swing.JButton();
-        updatemesin2 = new javax.swing.JButton();
-        updatemesinjadi1 = new javax.swing.JButton();
-        updatemesinjadi2 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
         panelutama = new diu.swe.habib.JPanelSlider.JPanelSlider();
         panelmap = new javax.swing.JPanel();
         btnparik = new javax.swing.JButton();
@@ -399,7 +391,6 @@ public class map extends masterview {
         txtlevelmobil = new javax.swing.JLabel();
         background4 = new javax.swing.JLabel();
         panelpabrik = new javax.swing.JPanel();
-        panelutamapabrik = new diu.swe.habib.JPanelSlider.JPanelSlider();
         panel2 = new javax.swing.JPanel();
         popupmesinjadi = new javax.swing.JPanel();
         tmbproduksicoklat = new javax.swing.JButton();
@@ -416,7 +407,6 @@ public class map extends masterview {
         tmbmesinjadi1 = new javax.swing.JButton();
         labelmesinjadi1 = new javax.swing.JLabel();
         labelmesinjadi2 = new javax.swing.JLabel();
-        jButton14 = new javax.swing.JButton();
         btnmap1 = new javax.swing.JButton();
         panelbahan1 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -445,54 +435,7 @@ public class map extends masterview {
         txtturbo = new javax.swing.JLabel();
         txtserealcoklat = new javax.swing.JLabel();
         txtserealkeju = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         background1 = new javax.swing.JLabel();
-
-        upgrademesin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setText("update");
-        upgrademesin.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 5, -1, -1));
-
-        updatemesin1.setText("mesin1");
-        updatemesin1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesin1ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesin1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
-
-        updatemesin2.setText("mesin2");
-        updatemesin2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesin2ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, -1, -1));
-
-        updatemesinjadi1.setText("mesinjadi1");
-        updatemesinjadi1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesinjadi1ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesinjadi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
-
-        updatemesinjadi2.setText("mesinjadi2");
-        updatemesinjadi2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatemesinjadi2ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(updatemesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, -1, -1));
-
-        jButton16.setText("ok");
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
-            }
-        });
-        upgrademesin.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1069,9 +1012,6 @@ public class map extends masterview {
 
         panelpabrik.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelutamapabrik.setBorder(null);
-        panelutamapabrik.setOpaque(false);
-
         panel2.setOpaque(false);
         panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1184,17 +1124,7 @@ public class map extends masterview {
         labelmesinjadi2.setToolTipText("");
         panel2.add(labelmesinjadi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 350, 340));
 
-        panelutamapabrik.add(panel2, "card2");
-
-        panelpabrik.add(panelutamapabrik, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 980, 470));
-
-        jButton14.setText("upgrade");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-        panelpabrik.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 30, 130, 60));
+        panelpabrik.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, -1));
 
         btnmap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/map1.png"))); // NOI18N
         btnmap1.setBorderPainted(false);
@@ -1379,13 +1309,13 @@ public class map extends masterview {
         panelgudangfinish.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjserealkeju.png"))); // NOI18N
-        panelgudangfinish.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 160, 150));
+        panelgudangfinish.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, 160, 150));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjturbo.png"))); // NOI18N
-        panelgudangfinish.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 310, 140, 150));
+        panelgudangfinish.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 20, 140, 150));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bjserealcoklat.png"))); // NOI18N
-        panelgudangfinish.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 110, 150));
+        panelgudangfinish.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 110, 150));
 
         btnmap.setText("map");
         btnmap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1401,21 +1331,15 @@ public class map extends masterview {
 
         txtturbo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtturbo.setText("jLabel4");
-        panelgudangfinish.add(txtturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 480, 80, 30));
+        panelgudangfinish.add(txtturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 190, 80, 30));
 
         txtserealcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtserealcoklat.setText("jLabel4");
-        panelgudangfinish.add(txtserealcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 80, 30));
+        panelgudangfinish.add(txtserealcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 80, 30));
 
         txtserealkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtserealkeju.setText("jLabel4");
-        panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, 80, 30));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        panelgudangfinish.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 180, 300));
+        panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 190, 80, 30));
 
         background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bggudang.jpg"))); // NOI18N
         panelgudangfinish.add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
@@ -1498,7 +1422,7 @@ public class map extends masterview {
     private void tmbmesinjadi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbmesinjadi1ActionPerformed
         popupmesinjadi.setVisible(true);
         cekproduksi();
-        pillihidmesin = 2;
+        pillihidmesin = 0;
     }//GEN-LAST:event_tmbmesinjadi1ActionPerformed
 
     private void tmbmesinjadi2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tmbmesinjadi2MouseClicked
@@ -1507,32 +1431,8 @@ public class map extends masterview {
 
     private void tmbmesinjadi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tmbmesinjadi2ActionPerformed
         popupmesinjadi.setVisible(true);
-        pillihidmesin = 3;
+        pillihidmesin = 1;
     }//GEN-LAST:event_tmbmesinjadi2ActionPerformed
-
-    private void updatemesin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesin1ActionPerformed
-        setdetikloop[0] -= 1;
-    }//GEN-LAST:event_updatemesin1ActionPerformed
-
-    private void updatemesin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesin2ActionPerformed
-        setdetikloop[1] -= 1;
-    }//GEN-LAST:event_updatemesin2ActionPerformed
-
-    private void updatemesinjadi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesinjadi1ActionPerformed
-        setdetikloop[2] -= 1;
-    }//GEN-LAST:event_updatemesinjadi1ActionPerformed
-
-    private void updatemesinjadi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemesinjadi2ActionPerformed
-        setdetikloop[0] -= 1;
-    }//GEN-LAST:event_updatemesinjadi2ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        upgrademesin.setVisible(true);
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        upgrademesin.setVisible(false);
-    }//GEN-LAST:event_jButton16ActionPerformed
 
     private void btnbelijagungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbelijagungActionPerformed
         int get = Integer.parseInt(txtbelijagung.getText()) + 10;
@@ -1650,6 +1550,7 @@ public class map extends masterview {
                     modelbarang.belibarang("bmplastik", "0", uang + "", id);
                     level++;
                     kecepatan += 2;
+                    modelbarang.upgradebarang("mobil", kecepatan + "", id);
                     txtlevelmobil.setText(level + "");
                     message("upgrade mobil berhasil");
                 } else {
@@ -1659,6 +1560,7 @@ public class map extends masterview {
                 if (Integer.parseInt(txtuang.getText()) > 20000) {
                     level++;
                     kecepatan += 2;
+                    modelbarang.upgradebarang("mesin1", setdetikloop[0] + "", id);
                     int uang = Integer.parseInt(txtuang.getText()) - 20000;
                     txtuang.setText(uang + "");
                     modelbarang.belibarang("bmplastik", "0", uang + "", id);
@@ -1848,12 +1750,15 @@ public class map extends masterview {
         if (level == 1) {
             level++;
             txtlevelmesin1.setText(level + "");
-            setdetikloop[2] -= 25;
+            setdetikloop[0] -= 25;
+            modelbarang.upgradebarang("mesin1", setdetikloop[0] + "", id);
             message("mesin 1 berhasil di upgrade");
         } else if (level == 2) {
             level++;
             txtlevelmesin1.setText(level + "");
-            setdetikloop[2] -= 25;
+            setdetikloop[0] -= 25;
+            modelbarang.upgradebarang("mesin1", setdetikloop[0] + "", id);
+
             message("mesin 1 berhasil di upgrade");
         } else {
             message("upgrade sudah maksimal");
@@ -1865,12 +1770,16 @@ public class map extends masterview {
         if (level == 1) {
             level++;
             txtlevelmesin2.setText(level + "");
-            setdetikloop[3] -= 25;
+            setdetikloop[1] -= 25;
+            modelbarang.upgradebarang("mesin1", setdetikloop[1] + "", id);
+
             message("mesin 2 berhasil di upgrade");
         } else if (level == 2) {
             level++;
             txtlevelmesin2.setText(level + "");
-            setdetikloop[3] -= 25;
+            setdetikloop[1] -= 25;
+            modelbarang.upgradebarang("mesin1", setdetikloop[1] + "", id);
+
             message("mesin 2 berhasil di upgrade");
         } else {
             message("upgrade sudah maksimal");
@@ -1936,10 +1845,10 @@ public class map extends masterview {
     public void prosesmesin(int idmesin) {
         setpopupvisibelfalse();
         switch (idmesin) {
-            case 2:
+            case 0:
                 seticongif("mesinjadi", labelmesinjadi1);
                 break;
-            case 3:
+            case 1:
                 seticongif("mesinjadi", labelmesinjadi2);
                 break;
             default:
@@ -2023,9 +1932,7 @@ public class map extends masterview {
     private javax.swing.JButton btnsawah2;
     private javax.swing.JButton gandum;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton3;
@@ -2059,13 +1966,10 @@ public class map extends masterview {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jagung;
     private javax.swing.JLabel labelmesinjadi1;
     private javax.swing.JLabel labelmesinjadi2;
@@ -2082,7 +1986,6 @@ public class map extends masterview {
     private javax.swing.JPanel panelpabrik;
     private javax.swing.JPanel panelsawah;
     private diu.swe.habib.JPanelSlider.JPanelSlider panelutama;
-    private diu.swe.habib.JPanelSlider.JPanelSlider panelutamapabrik;
     private javax.swing.JPanel popupmesinjadi;
     private javax.swing.JPanel popuppanentanaman;
     private javax.swing.JPanel popuppiltanaman;
@@ -2126,11 +2029,6 @@ public class map extends masterview {
     private javax.swing.JLabel txtuang;
     private javax.swing.JLabel txtwaktusawah1;
     private javax.swing.JLabel txtwaktusawah2;
-    private javax.swing.JButton updatemesin1;
-    private javax.swing.JButton updatemesin2;
-    private javax.swing.JButton updatemesinjadi1;
-    private javax.swing.JButton updatemesinjadi2;
-    private javax.swing.JPanel upgrademesin;
     private javax.swing.JButton upgrademobil;
     // End of variables declaration//GEN-END:variables
 

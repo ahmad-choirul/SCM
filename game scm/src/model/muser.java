@@ -22,6 +22,7 @@ public class muser extends koneksi {
         System.out.println("tambah user");
         String query = "INSERT INTO `user` (`id_user`, `nama`, `score`, `scorepopularitas`, `uang`, `bbjagung`, `bbgandum`, `bbsusu`, `bbgula`, `bmcoklat`, `bmplastik`, `bmkeju`, `bjserealcoklat`, `bjserealkeju`, `bjturbo`) VALUES "
                 + "(NULL, '"+nama+"', '0', '100', '1000', '10', '10', '100', '100', '2', '2', '5', '2', '0', '0', '0');";
+        
         System.out.println(query);
         return execute(query);
     }
@@ -32,8 +33,8 @@ public String[] cekbarang(String id) throws SQLException {
 
     }
 public String[] getupdatebarang(String id) throws SQLException {
-            String kolom[] = {"id_user","mesin1","mesin2","mesinjadi1","mesinjadi2","mobil1","mobil2"};
-            String query = "SELECT * FROM `upgrade` WHERE `id_user` =" + id;
+            String kolom[] = {"id_user","mesin1","mesin2","mobil"};
+            String query = "SELECT `nama`,`mesin1`,`mesin2`,`mobil` from user WHERE `id_user` =" + id;
             System.out.println("query = "+query);
             return getdataid(query, kolom);
 

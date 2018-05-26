@@ -22,10 +22,10 @@ public class masterview extends javax.swing.JFrame {
     Timer mytimer2 = new Timer();
     boolean stopgame = false;
     int detik = 0;
-    boolean loop[] = {false, false, false, false};
-    boolean change[] = {false, false, false, false};
-    int getdetik[] = {0, 0, 0, 0};
-    int setdetikloop[] = {120, 120, 120, 120};
+    boolean loop[] = {false, false};
+    boolean change[] = {false, false};
+    int getdetik[] = { 0, 0};
+    int setdetikloop[] = {120, 120};
     //getdetik 0= mesinjadi1
     //getdetik 1= mesinjadi2
     //getdetik 2= mesin1
