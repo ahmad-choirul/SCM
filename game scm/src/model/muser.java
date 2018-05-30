@@ -44,15 +44,24 @@ public class muser extends koneksi {
 //        }
 //        return b;
 //    }
-    public int[] getpenjualan(String id, int id_barang) throws SQLException {
-        String kolom[] = {"totaljual"};
+    public int[] getpenjualan(String id, int id_barang) {
+        String kolom = "total_jual";
+        String[] get= new String[6];
         String query = "SELECT total_jual FROM penjualan WHERE (id_user=" + id + " and id_barang=" + id_barang + ") order by bulan_ke DESC limit 6";
-        String[] a = getarraykolom(query);
+        System.out.println(query);
+        String[] a = getarraykolom(query,get,kolom);
         int[] b = new int[6];
         for (int i = 0; i < b.length; i++) {
             b[i] = Integer.parseInt(a[i]);
         }
         return b;
+    }
+    public String[] getuser() {
+        String kolom = "nama";
+        String[] get= new String[6];
+        String query = "SELECT nama FROM user";
+        String[] a = getarraykolom(query,get,kolom);
+        return a;
     }
 
     public String[] cekbarang(String id) throws SQLException {

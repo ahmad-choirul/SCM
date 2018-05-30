@@ -8,6 +8,7 @@ package view;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import model.muser;
 
@@ -21,13 +22,23 @@ public class mainmenu extends masterview {
      * Creates new form mainmenu
      */
     muser modeluser;
+    String[] daftaruser;
 
     public mainmenu() {
         try {
             initComponents();
             modeluser = new muser();
+            daftaruser = modeluser.getuser();
+            setjbutton(daftaruser);
         } catch (SQLException ex) {
             Logger.getLogger(mainmenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setjbutton(String[] get) {
+        JButton[] daftarbutton = new JButton[get.length];
+        for (int i = 0; i < get.length; i++) {
+            
         }
     }
 
@@ -45,6 +56,11 @@ public class mainmenu extends masterview {
         btncontinue = new javax.swing.JToggleButton();
         btnhelp = new javax.swing.JButton();
         btnscore = new javax.swing.JButton();
+        daftar = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,6 +131,20 @@ public class mainmenu extends masterview {
         });
         getContentPane().add(btnscore, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 580, 610, 130));
 
+        jButton1.setText("jButton1");
+        daftar.add(jButton1);
+
+        jButton2.setText("jButton2");
+        daftar.add(jButton2);
+
+        jButton3.setText("jButton3");
+        daftar.add(jButton3);
+
+        jButton4.setText("jButton4");
+        daftar.add(jButton4);
+
+        getContentPane().add(daftar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 180, 380));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgmainmenu.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 760));
 
@@ -125,7 +155,7 @@ public class mainmenu extends masterview {
         try {
 //            String nama = "abcd";
             String nama = JOptionPane.showInputDialog("masukan nama anda");
-            System.out.println("nama = "+nama);
+            System.out.println("nama = " + nama);
             modeluser.tambahuser(nama);
             setwindows(new map(modeluser.getiduser(nama)));
         } catch (SQLException ex) {
@@ -142,7 +172,7 @@ public class mainmenu extends masterview {
     }//GEN-LAST:event_btnscoreActionPerformed
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
-System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_btnexitActionPerformed
 
     private void btncontinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncontinueActionPerformed
@@ -191,5 +221,10 @@ System.exit(0);
     private javax.swing.JButton btnhelp;
     private javax.swing.JButton btnplay;
     private javax.swing.JButton btnscore;
+    private javax.swing.JPanel daftar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }

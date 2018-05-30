@@ -6,6 +6,8 @@ import java.math.BigInteger;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class koneksi {
@@ -59,14 +61,17 @@ public class koneksi {
         return data;
     }
 
-    public String[] getarraykolom(String query) throws SQLException {
-        String[] data = new String[6];
-        ResultSet rs = getResult(query);
-        int count = 0;
-        while (rs.next()) {
-            data[count] = rs.getString("total_jual");
-            System.out.println("data"+data[count]);
-            count++;
+    public String[] getarraykolom(String query, String[] data, String kolom) {
+        try {
+            ResultSet rs = getResult(query);
+            int count = 0;
+            while (rs.next()) {
+                data[count] = rs.getString(kolom);
+                System.out.println("data" + data[count]);
+                count++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(koneksi.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
     }

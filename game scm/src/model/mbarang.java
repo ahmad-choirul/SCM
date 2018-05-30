@@ -29,6 +29,15 @@ public class mbarang extends koneksi {
             return false;
         }
     }
+    public boolean jualbarang(String barang, String jumlah, String uang, String id) {
+        String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "-'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
+        String query = "UPDATE `user` SET `uang` = uang+'" + uang + "' WHERE `user`.`id_user` = " + id + " ";
+        if (execute(query)) {
+            return execute(query2);
+        } else {
+            return false;
+        }
+    }
 
     public String[] cekbarang(String id) throws SQLException {
         String kolom[] = {"id_user", "nama", "score", "scorepopularitas", "uang", "bbjagung", "bbgandum", "bbsusu", "bbgula","bmcoklat", "bmplastik", "bmkeju", "bjserealcoklat", "bjserealkeju", "bjturbo"};
