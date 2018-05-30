@@ -37,7 +37,7 @@ public class map extends masterview {
     boolean kananjual = true;
     String produkproduksi[] = {null, null};
     int locxtrukbeli = 700;
-    int locxtrukjual = 40;
+    int locxtrukjual = 200;
     boolean cekjalanawal = false;
     boolean belibarang = false;
     boolean jualbarang = false;
@@ -54,6 +54,7 @@ public class map extends masterview {
     double[] peramalan = {0, 0, 0};//untuk menamoung hasil peramalan
     double[] penjualan = {0, 0, 0};//untuk menampung jumlah pengiriman
     double[] ambilbulan = {0, 0, 0, 0, 0, 0};//untuk ambil 6 bulan sebelumnya
+    boolean[] boolpermintaan = {true, true, true};
 
     public map(String id) {
         initComponents();
@@ -66,7 +67,7 @@ public class map extends masterview {
         try {
             modeluser = new muser();
             modelbarang = new mbarang();
-            bulanke = modeluser.getbulanke(id);
+            bulanke = modeluser.getbulanke(id) + 1;
             setupgradebarang();
             setpermintaan();
         } catch (SQLException ex) {
@@ -103,7 +104,19 @@ public class map extends masterview {
                 System.out.println("cek " + detik);
                 if (detik % 300 == 0) {
                     bulanke++;
+                    if (peramalan[0] < 0 || peramalan[1] < 0 || peramalan[2] < 0) {
+                        message("gagal memenuhi permintaan");
+                        int get = Integer.parseInt(txtpopularitas.getText())-5;
+                        txtpopularitas.setText(get+"");
+                    } else {
+                        message("terpenuhi semua");
+                        int get = Integer.parseInt(txtpopularitas.getText())+10;
+                        txtpopularitas.setText(get+"");
+                    }
                     setpermintaan();
+                    boolpermintaan[0] = true;
+                    boolpermintaan[1] = true;
+                    boolpermintaan[2] = true;
                 }
                 if (waktusawah1) {
                     if (tanam.equalsIgnoreCase("jagung")) {
@@ -187,9 +200,9 @@ public class map extends masterview {
 
     public void setpermintaan() {
         if (bulanke >= 6) {
-            //1turbo
-            //2keju
-            //3coklat
+            //0coklat
+            //1keju
+            //2turbo
             peramalan[0] = doubleexp(modeluser.getpenjualan(id, 8));
             peramalan[1] = doubleexp(modeluser.getpenjualan(id, 9));
             peramalan[2] = doubleexp(modeluser.getpenjualan(id, 10));
@@ -302,27 +315,28 @@ public class map extends masterview {
 
         if (kananjual) {
             locxtrukjual = locxtrukjual + kecepatan;
-            panelgerak.setLocation(locxtrukjual, 590);
+            panelgerakjual.setLocation(locxtrukjual, 670);
         }
         if (!kananjual) {
             locxtrukjual = locxtrukjual - kecepatan;
-            panelgerakjual.setLocation(locxtrukjual, 590);
+            panelgerakjual.setLocation(locxtrukjual, 670);
         }
-        if (panelgerakjual.getX() > 730) {
-            seticonpng("truk", labelmobiljual);
+        if (panelgerakjual.getX() > 900) {
+            System.out.println("jalan balik");
+            seticonpng("truk2", labelmobiljual);
             kananjual = false;
         }
-        if (panelgerakjual.getX() < 39) {
+        if (panelgerakjual.getX() < 199) {
             message("Pesanan berhasil");
             seticonpng("truk", labelmobiljual);
             jualbarangdarikota();
-            setgudangppic();
+            settomboljual(true);
+            setgudangfinish();
             jualbarang = false;
         }
     }
 
     public void seticonpngloop(int i) {
-        System.out.println("seticonpngloop");
         if (i == 0) {
             seticonpng("mesinjadi", labelmesinjadi1);
         }
@@ -340,7 +354,8 @@ public class map extends masterview {
             txtserealcoklat1.setText(data[12]);
             txtserealkeju1.setText(data[13]);
             txtturbo1.setText(data[14]);
-
+            txtuang1.setText(data[4]);
+            txtpopularitas.setText(data[3]);
         } catch (SQLException ex) {
             Logger.getLogger(map.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -517,18 +532,20 @@ public class map extends masterview {
         txtserealcoklat = new javax.swing.JLabel();
         txtserealkeju = new javax.swing.JLabel();
         txtpenjualancoklat = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        kurangcoklat = new javax.swing.JButton();
+        tambahcoklat = new javax.swing.JButton();
+        kurangkeju = new javax.swing.JButton();
         txtpenjualankeju = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        tambahkeju = new javax.swing.JButton();
+        kurangturbo = new javax.swing.JButton();
         txtpenjualanturbo = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
+        tambahturbo = new javax.swing.JButton();
         txtjualturbo = new javax.swing.JLabel();
         txtjualcoklat = new javax.swing.JLabel();
         txtjualkeju = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
+        txtuang1 = new javax.swing.JLabel();
+        txtpopularitas = new javax.swing.JLabel();
         background1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1432,133 +1449,136 @@ public class map extends masterview {
         labelmobiljual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/truk.png"))); // NOI18N
         panelgerakjual.add(labelmobiljual, "card2");
 
-        panelgudangfinish.add(panelgerakjual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 310, 150));
+        panelgudangfinish.add(panelgerakjual, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 670, 190, 90));
 
         txtturbo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtturbo.setForeground(new java.awt.Color(255, 255, 255));
         txtturbo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtturbo.setText("aa");
-        panelgudangfinish.add(txtturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 100, 80, 30));
+        panelgudangfinish.add(txtturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 140, 80, 30));
 
         txtserealcoklat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtserealcoklat.setForeground(new java.awt.Color(255, 255, 255));
         txtserealcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtserealcoklat.setText("jLabel4");
-        panelgudangfinish.add(txtserealcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 80, 30));
+        panelgudangfinish.add(txtserealcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 80, 30));
 
         txtserealkeju.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtserealkeju.setForeground(new java.awt.Color(255, 255, 255));
         txtserealkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtserealkeju.setText("aa");
-        panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 80, 30));
+        panelgudangfinish.add(txtserealkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 80, 30));
 
         txtpenjualancoklat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtpenjualancoklat.setForeground(new java.awt.Color(255, 255, 255));
+        txtpenjualancoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtpenjualancoklat.setText("jLabel1");
-        panelgudangfinish.add(txtpenjualancoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 60, -1));
+        panelgudangfinish.add(txtpenjualancoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 610, 60, -1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
-        jButton2.setText("-");
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        kurangcoklat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
+        kurangcoklat.setText("-");
+        kurangcoklat.setBorderPainted(false);
+        kurangcoklat.setContentAreaFilled(false);
+        kurangcoklat.setFocusPainted(false);
+        kurangcoklat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
+        kurangcoklat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                kurangcoklatActionPerformed(evt);
             }
         });
-        panelgudangfinish.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 380, 90, -1));
+        panelgudangfinish.add(kurangcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 90, -1));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.setFocusPainted(false);
-        jButton4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        tambahcoklat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
+        tambahcoklat.setBorderPainted(false);
+        tambahcoklat.setContentAreaFilled(false);
+        tambahcoklat.setFocusPainted(false);
+        tambahcoklat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
+        tambahcoklat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                tambahcoklatActionPerformed(evt);
             }
         });
-        panelgudangfinish.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, -1, -1));
+        panelgudangfinish.add(tambahcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 70, 70));
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
-        jButton5.setText("-");
-        jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
-        jButton5.setFocusPainted(false);
-        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        kurangkeju.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
+        kurangkeju.setText("-");
+        kurangkeju.setBorderPainted(false);
+        kurangkeju.setContentAreaFilled(false);
+        kurangkeju.setFocusPainted(false);
+        kurangkeju.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
+        kurangkeju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                kurangkejuActionPerformed(evt);
             }
         });
-        panelgudangfinish.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, 80, -1));
+        panelgudangfinish.add(kurangkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 80, -1));
 
         txtpenjualankeju.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtpenjualankeju.setForeground(new java.awt.Color(255, 255, 255));
+        txtpenjualankeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtpenjualankeju.setText("jLabel1");
-        panelgudangfinish.add(txtpenjualankeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 540, 70, -1));
+        panelgudangfinish.add(txtpenjualankeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 610, 70, -1));
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
-        jButton7.setBorderPainted(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.setFocusPainted(false);
-        jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        tambahkeju.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
+        tambahkeju.setBorderPainted(false);
+        tambahkeju.setContentAreaFilled(false);
+        tambahkeju.setFocusPainted(false);
+        tambahkeju.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
+        tambahkeju.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                tambahkejuActionPerformed(evt);
             }
         });
-        panelgudangfinish.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, -1, -1));
+        panelgudangfinish.add(tambahkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 360, 70, -1));
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
-        jButton8.setText("-");
-        jButton8.setBorderPainted(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setFocusPainted(false);
-        jButton8.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        kurangturbo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus.png"))); // NOI18N
+        kurangturbo.setText("-");
+        kurangturbo.setBorderPainted(false);
+        kurangturbo.setContentAreaFilled(false);
+        kurangturbo.setFocusPainted(false);
+        kurangturbo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/minus2.png"))); // NOI18N
+        kurangturbo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                kurangturboActionPerformed(evt);
             }
         });
-        panelgudangfinish.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 380, -1, -1));
+        panelgudangfinish.add(kurangturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(945, 360, 90, -1));
 
         txtpenjualanturbo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtpenjualanturbo.setForeground(new java.awt.Color(255, 255, 255));
+        txtpenjualanturbo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtpenjualanturbo.setText("jLabel1");
-        panelgudangfinish.add(txtpenjualanturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 540, 70, -1));
+        panelgudangfinish.add(txtpenjualanturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 610, 70, -1));
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
-        jButton9.setBorderPainted(false);
-        jButton9.setContentAreaFilled(false);
-        jButton9.setFocusPainted(false);
-        jButton9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        tambahturbo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus.png"))); // NOI18N
+        tambahturbo.setBorderPainted(false);
+        tambahturbo.setContentAreaFilled(false);
+        tambahturbo.setFocusPainted(false);
+        tambahturbo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/plus2.png"))); // NOI18N
+        tambahturbo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                tambahturboActionPerformed(evt);
             }
         });
-        panelgudangfinish.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 380, 90, 70));
+        panelgudangfinish.add(tambahturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 360, 70, 70));
 
         txtjualturbo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtjualturbo.setForeground(new java.awt.Color(255, 255, 255));
         txtjualturbo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtjualturbo.setText("800");
-        panelgudangfinish.add(txtjualturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 400, 60, 40));
+        txtjualturbo.setText("0");
+        panelgudangfinish.add(txtjualturbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 370, 60, 40));
 
         txtjualcoklat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtjualcoklat.setForeground(new java.awt.Color(255, 255, 255));
         txtjualcoklat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtjualcoklat.setText("800");
-        panelgudangfinish.add(txtjualcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 60, 40));
+        txtjualcoklat.setText("0");
+        panelgudangfinish.add(txtjualcoklat, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 60, 40));
 
         txtjualkeju.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtjualkeju.setForeground(new java.awt.Color(255, 255, 255));
         txtjualkeju.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtjualkeju.setText("800");
-        panelgudangfinish.add(txtjualkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 400, 60, 40));
+        txtjualkeju.setText("0");
+        panelgudangfinish.add(txtjualkeju, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, 60, 40));
 
         jButton10.setText("kirim");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -1566,9 +1586,21 @@ public class map extends masterview {
                 jButton10ActionPerformed(evt);
             }
         });
-        panelgudangfinish.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1059, 660, 110, 50));
+        panelgudangfinish.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 690, 110, 50));
 
-        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/bgdistributor.png"))); // NOI18N
+        txtuang1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtuang1.setForeground(new java.awt.Color(255, 255, 255));
+        txtuang1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtuang1.setText("jLabel1");
+        panelgudangfinish.add(txtuang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 40, 210, 50));
+
+        txtpopularitas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtpopularitas.setForeground(new java.awt.Color(255, 255, 255));
+        txtpopularitas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpopularitas.setText("jLabel1");
+        panelgudangfinish.add(txtpopularitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, 210, 50));
+
+        background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/backFg.png"))); // NOI18N
         panelgudangfinish.add(background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 770));
 
         panelutama.add(panelgudangfinish, "card3");
@@ -2014,39 +2046,76 @@ public class map extends masterview {
         panelutama.nextPanel(25, panelmarketing, panelutama.right);
     }//GEN-LAST:event_btnmarketingActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void kurangcoklatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kurangcoklatActionPerformed
         rubahjumlahjual("-", txtjualcoklat);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        tambahcoklat.setEnabled(true);
+        if (txtjualcoklat.getText().equalsIgnoreCase("0")) {
+            kurangcoklat.setEnabled(false);
+        }
+    }//GEN-LAST:event_kurangcoklatActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void tambahcoklatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahcoklatActionPerformed
         rubahjumlahjual("+", txtjualcoklat);
-    }//GEN-LAST:event_jButton4ActionPerformed
+        kurangcoklat.setEnabled(true);
+        if (Integer.parseInt(txtserealcoklat.getText()) - 100 < Integer.parseInt(txtjualcoklat.getText())) {
+            tambahcoklat.setEnabled(false);
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        }
+
+    }//GEN-LAST:event_tambahcoklatActionPerformed
+
+    private void kurangkejuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kurangkejuActionPerformed
         rubahjumlahjual("-", txtjualkeju);
-    }//GEN-LAST:event_jButton5ActionPerformed
+        tambahkeju.setEnabled(true);
+        if (txtjualkeju.getText().equalsIgnoreCase("0")) {
+            kurangkeju.setEnabled(false);
+        }
+    }//GEN-LAST:event_kurangkejuActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void tambahkejuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahkejuActionPerformed
         rubahjumlahjual("+", txtjualkeju);
-    }//GEN-LAST:event_jButton7ActionPerformed
+        kurangkeju.setEnabled(true);
+        if (Integer.parseInt(txtserealkeju.getText()) - 100 < Integer.parseInt(txtjualkeju.getText())) {
+            tambahkeju.setEnabled(false);
+        }
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_tambahkejuActionPerformed
+
+    private void kurangturboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kurangturboActionPerformed
         rubahjumlahjual("-", txtjualturbo);
-    }//GEN-LAST:event_jButton8ActionPerformed
+        tambahturbo.setEnabled(true);
+        if (txtjualturbo.getText().equalsIgnoreCase("0")) {
+            kurangturbo.setEnabled(false);
+        }
+    }//GEN-LAST:event_kurangturboActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void tambahturboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahturboActionPerformed
         rubahjumlahjual("+", txtjualturbo);
-    }//GEN-LAST:event_jButton9ActionPerformed
+        kurangturbo.setEnabled(true);
+        if (Integer.parseInt(txtturbo.getText()) - 100 < Integer.parseInt(txtjualturbo.getText())) {
+            tambahturbo.setEnabled(false);
+
+        }
+
+    }//GEN-LAST:event_tambahturboActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        settomboljual(false);
         gerakmobiljual = true;
     }//GEN-LAST:event_jButton10ActionPerformed
+    public void settomboljual(boolean bool) {
+        kurangcoklat.setEnabled(bool);
+        kurangkeju.setEnabled(bool);
+        kurangturbo.setEnabled(bool);
+        tambahcoklat.setEnabled(bool);
+        tambahkeju.setEnabled(bool);
+        tambahturbo.setEnabled(bool);
+    }
+
     public void rubahjumlahjual(String stat, JLabel label) {
         int get = Integer.parseInt(label.getText());
         if (stat.equalsIgnoreCase("-")) {
-            if (get <= 800) {
-                message("tidak boleh kurang dari 800");
-            } else {
+            if (get != 0) {
                 get -= 100;
             }
         } else {
@@ -2099,9 +2168,27 @@ public class map extends masterview {
         int turbo = Integer.parseInt(txtjualturbo.getText()) / 100;
         int coklat = Integer.parseInt(txtjualcoklat.getText()) / 100;
         int keju = Integer.parseInt(txtjualkeju.getText()) / 100;
-        modelbarang.jualbarang("bjturbo", txtjualturbo.getText(), (turbo * 650) + "", id);
-        modelbarang.jualbarang("bjserealkeju", txtjualkeju.getText(), (keju * 900) + "", id);
-        modelbarang.jualbarang("bjserealcoklat", txtjualcoklat.getText(), (coklat * 800) + "", id);
+        //0coklat
+        //1keju
+        //2turbo
+        peramalan[0] -= coklat;
+        peramalan[1] -= keju;
+        peramalan[2] -= turbo;
+        if (peramalan[0] < 0 && boolpermintaan[0] == true) {
+            message("permintaan coklat terpenuhi");
+            boolpermintaan[0] = false;
+        }
+        if (peramalan[1] < 0 && boolpermintaan[1] == true) {
+            message("permintaan keju terpenuhi");
+            boolpermintaan[1] = false;
+        }
+        if (peramalan[2] < 0 && boolpermintaan[2] == true) {
+            message("permintaan turbo terpenuhi");
+            boolpermintaan[2] = false;
+        }
+        modelbarang.jualbarang("bjturbo", txtjualturbo.getText(), (turbo * 650) + "", id, bulanke);
+        modelbarang.jualbarang("bjserealkeju", txtjualkeju.getText(), (keju * 900) + "", id, bulanke);
+        modelbarang.jualbarang("bjserealcoklat", txtjualcoklat.getText(), (coklat * 800) + "", id, bulanke);
     }
 
     public void cekproduksi() {
@@ -2211,15 +2298,9 @@ public class map extends masterview {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -2249,6 +2330,9 @@ public class map extends masterview {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jagung;
+    private javax.swing.JButton kurangcoklat;
+    private javax.swing.JButton kurangkeju;
+    private javax.swing.JButton kurangturbo;
     private javax.swing.JLabel labelmesinjadi1;
     private javax.swing.JLabel labelmesinjadi2;
     private javax.swing.JLabel labelmobil;
@@ -2268,6 +2352,9 @@ public class map extends masterview {
     private javax.swing.JPanel popupmesinjadi;
     private javax.swing.JPanel popuppanentanaman;
     private javax.swing.JPanel popuppiltanaman;
+    private javax.swing.JButton tambahcoklat;
+    private javax.swing.JButton tambahkeju;
+    private javax.swing.JButton tambahturbo;
     private javax.swing.JButton tmbmesinjadi1;
     private javax.swing.JButton tmbmesinjadi2;
     private javax.swing.JButton tmbproduksicoklat;
@@ -2306,6 +2393,7 @@ public class map extends masterview {
     private javax.swing.JLabel txtpenjualancoklat;
     private javax.swing.JLabel txtpenjualankeju;
     private javax.swing.JLabel txtpenjualanturbo;
+    private javax.swing.JLabel txtpopularitas;
     private javax.swing.JButton txtsawah1;
     private javax.swing.JButton txtsawah2;
     private javax.swing.JLabel txtserealcoklat;
@@ -2315,6 +2403,7 @@ public class map extends masterview {
     private javax.swing.JLabel txtturbo;
     private javax.swing.JLabel txtturbo1;
     private javax.swing.JLabel txtuang;
+    private javax.swing.JLabel txtuang1;
     private javax.swing.JLabel txtwaktusawah1;
     private javax.swing.JLabel txtwaktusawah2;
     private javax.swing.JButton upgrademobil;

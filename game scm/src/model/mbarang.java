@@ -29,21 +29,37 @@ public class mbarang extends koneksi {
             return false;
         }
     }
-    public boolean jualbarang(String barang, String jumlah, String uang, String id) {
+
+    public boolean jualbarang(String barang, String jumlah, String uang, String id,int bulanke) {
         String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "-'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
         String query = "UPDATE `user` SET `uang` = uang+'" + uang + "' WHERE `user`.`id_user` = " + id + " ";
-        if (execute(query)) {
+        String query3 = "INSERT INTO `penjualan` (`id_penjualan`, `id_user`, `id_barang`, `bulan_ke`, `total_jual`) VALUES "
+                + "(NULL, '" + id + "', '" + getidbarang(barang) + "', '"+bulanke+"', '"+jumlah+"');";
+        if (execute(query3)) {
+            execute(query);
             return execute(query2);
         } else {
             return false;
         }
     }
 
+    public String getidbarang(String nama) {
+        String id="";
+        try {
+            String query = "SELECT`id_barang` from barang WHERE nama_barang = '" + nama + "'";
+            id = getdataidNoaray(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(mbarang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
     public String[] cekbarang(String id) throws SQLException {
-        String kolom[] = {"id_user", "nama", "score", "scorepopularitas", "uang", "bbjagung", "bbgandum", "bbsusu", "bbgula","bmcoklat", "bmplastik", "bmkeju", "bjserealcoklat", "bjserealkeju", "bjturbo"};
+        String kolom[] = {"id_user", "nama", "score", "scorepopularitas", "uang", "bbjagung", "bbgandum", "bbsusu", "bbgula", "bmcoklat", "bmplastik", "bmkeju", "bjserealcoklat", "bjserealkeju", "bjturbo"};
         String query = "select * from user where id_user = " + id;
         return getdataid(query, kolom);
     }
+
     public String[] cekbibit(String id) throws SQLException {
         String kolom[] = {"bbjagung", "bbgandum"};
         String query = "select bbjagung,bbgandum from user where id_user = " + id;
@@ -54,6 +70,7 @@ public class mbarang extends koneksi {
         String query2 = "UPDATE `user` SET `" + barang + "` = " + barang + "-'" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
         return execute(query2);
     }
+
     public boolean upgradebarang(String barang, String jumlah, String id) {
         String query2 = "UPDATE `user` SET `" + barang + "` = '" + jumlah + "' WHERE `user`.`id_user` = " + id + ";";
         return execute(query2);
