@@ -76,6 +76,33 @@ public class koneksi {
         return data;
     }
 
+    public String[] getarraynama(String query, String kolom) {
+        int count = 0;
+        try {
+            ResultSet rs = getResult(query);
+            while (rs.next()) {
+                count++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(koneksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("count"+count);
+        String[] data = new String[count];
+        try {
+            int a=0;
+            ResultSet rs = getResult(query);
+            while (rs.next()) {
+                data[a] = rs.getString(kolom);
+                System.out.println("data" + data[a]);
+                a++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(koneksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return data;
+    }
+
     public DefaultTableModel getDatatotal(String query, String kolom[]) throws SQLException {
         DefaultTableModel table = new DefaultTableModel(null, kolom);
         ResultSet rs = getResult(query);

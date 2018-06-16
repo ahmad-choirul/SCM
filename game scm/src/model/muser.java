@@ -47,7 +47,7 @@ public class muser extends koneksi {
     public int[] getpenjualan(String id, int id_barang) {
         String kolom = "total_jual";
         String[] get= new String[6];
-        String query = "SELECT total_jual FROM penjualan WHERE (id_user=" + id + " and id_barang=" + id_barang + ") order by bulan_ke DESC limit 6";
+        String query = "SELECT total_jual FROM penjualan WHERE (id_user=" + id + " and id_barang=" + id_barang + ") order by bulan_ke asc limit 6";
         System.out.println(query);
         String[] a = getarraykolom(query,get,kolom);
         int[] b = new int[6];
@@ -58,9 +58,8 @@ public class muser extends koneksi {
     }
     public String[] getuser() {
         String kolom = "nama";
-        String[] get= new String[6];
         String query = "SELECT nama FROM user";
-        String[] a = getarraykolom(query,get,kolom);
+        String[] a = getarraynama(query,kolom);
         return a;
     }
 
